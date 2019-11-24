@@ -1,8 +1,9 @@
-nvidia-graphics-drivers-tesla (418.87.01-2) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-tesla (418.87.01-2) unstable; urgency=medium
 
   * Bump glx-alternative-nvidia dependency for ppc64el support.
+  * Upload to unstable.
 
- -- Andreas Beckmann <anbe@debian.org>  Sat, 23 Nov 2019 13:50:33 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 24 Nov 2019 01:47:20 +0100
 
 nvidia-graphics-drivers-tesla (418.87.01-1) experimental; urgency=medium
 
