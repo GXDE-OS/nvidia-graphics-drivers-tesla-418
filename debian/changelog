@@ -1,6 +1,17 @@
+nvidia-graphics-drivers-tesla (418.87.01-3) UNRELEASED; urgency=medium
+
+  * Allow alternative libnvidia-{tesla,legacy-*}-ml1 packages to substitute
+    libnvidia-ml1 (430.64-2).
+    - Add Provides: libnvidia-ml.so.1 (= ${nvidia:Version}).
+    - Generate alternative versioned dependency on libnvidia-ml.so.1 through
+      the symbols file.
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 06 Dec 2019 04:41:22 +0100
+
 nvidia-graphics-drivers-tesla (418.87.01-2) unstable; urgency=medium
 
   * Bump glx-alternative-nvidia dependency for ppc64el support.
+  * Create and commit tarball symlinks for legacy branches (430.64-1).
   * Upload to unstable.
 
  -- Andreas Beckmann <anbe@debian.org>  Sun, 24 Nov 2019 01:47:20 +0100
@@ -13,9 +24,9 @@ nvidia-graphics-drivers-tesla (418.87.01-1) experimental; urgency=medium
   [ Andreas Beckmann ]
   * Backport fixes for Linux 5.2/5.3 from 418.88.
   * debian/gen-control.pl: Support substitutions in the Architecture field and
-    skip packages with empty or commented Architecture field.
+    skip packages with empty or commented Architecture field (430.50-2).
   * Prepare infrastructure for packaging Tesla driver releases (available for
-    amd64 (including some i386 libs) and ppc64el).
+    amd64 (including some i386 libs) and ppc64el) (430.50-2).
   * Fork as new source package, rename everything to include '-tesla'.
     (Closes: #942149)
   * Do not build 'unversioned' packages from this source.
