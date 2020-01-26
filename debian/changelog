@@ -1,6 +1,7 @@
 nvidia-graphics-drivers-tesla (418.116.00-2) UNRELEASED; urgency=medium
 
   * Use separately packaged nvidia-settings-tesla.  (Closes: #948961)
+  * Drop superfluous Conflicts+Breaks+Replaces.
 
  -- Andreas Beckmann <anbe@debian.org>  Sun, 26 Jan 2020 21:58:21 +0100
 
