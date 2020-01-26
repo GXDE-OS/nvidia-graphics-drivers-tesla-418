@@ -71,10 +71,10 @@ if [ "$1" = "triggered" ]; then
 		$(add_slave /usr/lib/nvidia/nvidia-bug-report.sh nvidia-bug-report.sh /usr/lib/#PRIVATE#/nvidia-bug-report.sh)
 		$(add_slave /usr/bin/nvidia-debugdump nvidia-debugdump /usr/lib/#PRIVATE#/nvidia-debugdump)
 		$(add_slave /usr/share/nvidia/nvidia-application-profiles-key-documentation nvidia-application-profiles-key-documentation /usr/share/nvidia/nvidia-application-profiles-#VERSION#-key-documentation)
-		$(add_slave /usr/bin/nvidia-settings nvidia-settings /usr/lib/nvidia/current/nvidia-settings)
-		$(add_slave /usr/bin/nv-control-dpy nv-control-dpy /usr/lib/nvidia/current/nv-control-dpy)
-		$(add_slave /usr/share/applications/nvidia-settings.desktop nvidia-settings.desktop /usr/lib/nvidia/current/nvidia-settings.desktop)
-		$(add_slave /usr/share/man/man1/nvidia-settings.1.gz nvidia-settings.1.gz /usr/lib/nvidia/current/nvidia-settings.1.gz)
+		$(add_slave /usr/bin/nvidia-settings nvidia-settings /usr/lib/#PRIVATE#/nvidia-settings)
+		$(add_slave /usr/bin/nv-control-dpy nv-control-dpy /usr/lib/#PRIVATE#/nv-control-dpy)
+		$(add_slave /usr/share/applications/nvidia-settings.desktop nvidia-settings.desktop /usr/lib/#PRIVATE#/nvidia-settings.desktop)
+		$(add_slave /usr/share/man/man1/nvidia-settings.1.gz nvidia-settings.1.gz /usr/lib/#PRIVATE#/nvidia-settings.1.gz)
 "
 	conf_slaves="
 		$(add_slave /etc/nvidia/nvidia-drm-outputclass.conf nvidia-drm-outputclass.conf /etc/#PRIVATE#/nvidia-drm-outputclass.conf)
