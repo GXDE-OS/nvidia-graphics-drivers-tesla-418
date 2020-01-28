@@ -1,6 +1,7 @@
 nvidia-graphics-drivers-tesla-418 (418.116.00-2) UNRELEASED; urgency=medium
 
   * Rename to *-tesla-418-*.
+  * Add transitional nvidia-tesla-driver package.
   * Use separately packaged nvidia-settings-tesla-418.  (Closes: #948961)
   * Drop superfluous Conflicts+Breaks+Replaces.
   * Use substitution to keep Standards-Version in sync (430.64-5).
