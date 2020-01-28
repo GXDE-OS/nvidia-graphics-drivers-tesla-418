@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-tesla-418 (418.116.00-2) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-tesla-418 (418.116.00-2) experimental; urgency=medium
 
   * Rename to *-tesla-418-*.
   * Add transitional nvidia-tesla-driver package.
@@ -7,8 +7,9 @@ nvidia-graphics-drivers-tesla-418 (418.116.00-2) UNRELEASED; urgency=medium
   * Use substitution to keep Standards-Version in sync (430.64-5).
   * Insert '-' between suffix ending with digit and SOVERSION (435.21-3).
   * Bump Standards-Version to 4.5.0. No changes needed.
+  * Upload to experimental.
 
- -- Andreas Beckmann <anbe@debian.org>  Sun, 26 Jan 2020 21:58:21 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 28 Jan 2020 16:41:44 +0100
 
 nvidia-graphics-drivers-tesla (418.116.00-1) unstable; urgency=medium
 
