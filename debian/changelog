@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-tesla-418 (418.116.00-3) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 09 Feb 2020 23:03:18 +0100
+
 nvidia-graphics-drivers-tesla-418 (418.116.00-2) experimental; urgency=medium
 
   * Rename to *-tesla-418-*.
