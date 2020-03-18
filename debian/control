@@ -65,16 +65,6 @@ Description: NVIDIA metapackage${nvidia:VariantDesc}
  .
  Building the kernel module has been tested up to Linux ${nvidia:kmod:tested:Linux}.
 
-Package: nvidia-tesla-driver
-Section: non-free/oldlibs
-Architecture: amd64 ppc64el
-Depends:
- ${nvidia}-driver (= ${binary:Version}),
- ${misc:Depends}
-Description: transition to nvidia-tesla-418-driver
- This transitional package aides switching to ${nvidia}-driver.
- It can be safely removed.
-
 Package: nvidia-tesla-418-alternative
 Architecture: i386 amd64 ppc64el
 Multi-Arch: foreign
