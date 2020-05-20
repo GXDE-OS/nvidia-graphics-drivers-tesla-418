@@ -1,3 +1,11 @@
+nvidia-graphics-drivers-tesla-418 (418.126.02-4) UNRELEASED; urgency=medium
+
+  * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7,
+    thanks to Jiri Palecek.
+  * Switch to debhelper-compat (= 13).
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 20 May 2020 11:38:30 +0200
+
 nvidia-graphics-drivers-tesla-418 (418.126.02-3) unstable; urgency=medium
 
   * Backport nv_ioremap_nocache changes from 440.64 and nv_proc_ops_t and
