@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-tesla-418 (418.152.00-2) UNRELEASED; urgency=medium
+
+  * Replace *-i386 helper packages with *:i386 recommendations (440.100-2).
+
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 16 Jul 2020 14:13:18 +0200
+
 nvidia-graphics-drivers-tesla-418 (418.152.00-1) unstable; urgency=medium
 
   * New upstream Tesla release 418.152.00 (2020-06-24).
@@ -56,10 +62,10 @@ nvidia-graphics-drivers-tesla-418 (418.116.00-2) experimental; urgency=medium
   * Rename to *-tesla-418-*.
   * Add transitional nvidia-tesla-driver package.
   * Use separately packaged nvidia-settings-tesla-418.  (Closes: #948961)
-  * Drop superfluous Conflicts+Breaks+Replaces.
   * Use substitution to keep Standards-Version in sync (430.64-5).
   * Insert '-' between suffix ending with digit and SOVERSION (435.21-3).
   * Rename "legacy" variables to more generic "variant" (440.44-2).
+  * Drop versioned constraints that are satisfied in stretch (440.64-2).
   * Bump Standards-Version to 4.5.0. No changes needed.
   * Upload to experimental.
 
@@ -638,6 +644,7 @@ nvidia-graphics-drivers (390.138-1) stretch; urgency=medium
       NVIDIA kernel module failed to build with error "unknown type name
       'vm_fault_t'".
     - Add PRIME Synchronization support for Linux kernel 5.4 and newer.
+      (Closes: #948568)
 
   [ Andreas Beckmann ]
   * Fix #includes in conftest.sh to fix kernel module build for Linux 5.7,
