@@ -1,8 +1,8 @@
-nvidia-graphics-drivers-tesla-418 (418.226.00-4) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-tesla-418 (418.226.00-4) unstable; urgency=medium
 
   * Fix kernel module build for ppc64el.
 
- -- Andreas Beckmann <anbe@debian.org>  Wed, 13 Apr 2022 17:51:34 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 14 Apr 2022 16:03:48 +0200
 
 nvidia-graphics-drivers-tesla-418 (418.226.00-3) unstable; urgency=medium
 
