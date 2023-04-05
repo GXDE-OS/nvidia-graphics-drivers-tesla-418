@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-tesla-418 (418.226.00-10) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-tesla-418 (418.226.00-10) unstable; urgency=medium
 
   * Support acpi_op_remove callback returning void to fix kernel module build
     for Linux 6.2.
