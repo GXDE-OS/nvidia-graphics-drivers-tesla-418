@@ -4,7 +4,7 @@ nvidia-graphics-drivers-tesla-418 (418.226.00-10) unstable; urgency=medium
     for Linux 6.2.
   * Backport drm_connector_has_override_edid changes from 525.78.01 to fix
     kernel module build for Linux 6.2.
-  * nvidia-alternative: Access kmod config files over a versioned
+  * nvidia-tesla-418-alternative: Access kmod config files over a versioned
     symlink (510.108.03-3).
   * Add versioned Provides: nvidia-kernel-dkms-any (515.65.01-1).
   * New Brazilian Portuguese (pt_BR) debconf translations by Paulo Henrique de
