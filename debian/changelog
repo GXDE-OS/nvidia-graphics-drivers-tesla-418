@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-tesla-418 (418.226.00-14) UNRELEASED; urgency=medium
+
+  * New Romanian (ro) debconf translations by Remus-Gabriel Chelu.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 20 Jan 2024 02:28:08 +0100
+
 nvidia-graphics-drivers-tesla-418 (418.226.00-13) unstable; urgency=medium
 
   * Revert backport of pin_user_pages changes.
