@@ -11,14 +11,18 @@ Description: use KBUILD_CFLAGS and (KBUILD_)LDFLAGS
 
 --- a/Kbuild
 +++ b/Kbuild
-@@ -102,6 +102,10 @@ NV_CONFTEST_CMD := /bin/sh $(NV_CONFTEST
+@@ -102,6 +102,14 @@ NV_CONFTEST_CMD := /bin/sh $(NV_CONFTEST
   "$(strip $(CC))" "$(strip $(HOST_CC))" $(ARCH) $(NV_KERNEL_SOURCES) $(NV_KERNEL_OUTPUT)
  
  NV_CONFTEST_CFLAGS := $(shell $(NV_CONFTEST_CMD) build_cflags)
 +NV_CONFTEST_CFLAGS += \
-+	$(filter-out -Werror% $(GCC_PLUGINS_CFLAGS),\
++	$(filter-out $(GCC_PLUGINS_CFLAGS),\
 +	$(KBUILD_CFLAGS)\
 +	)
++NV_CONFTEST_CFLAGS += $(call cc-option,-Wno-error=implicit-function-declaration,)
++NV_CONFTEST_CFLAGS += $(call cc-option,-Wno-error=incompatible-pointer-types,)
++NV_CONFTEST_CFLAGS += $(call cc-option,-Wno-error=return-type,)
++NV_CONFTEST_CFLAGS += $(call cc-option,-Wno-error=strict-prototypes,)
  
  NV_CONFTEST_COMPILE_TEST_HEADERS := $(obj)/conftest/macros.h
  NV_CONFTEST_COMPILE_TEST_HEADERS += $(obj)/conftest/functions.h
