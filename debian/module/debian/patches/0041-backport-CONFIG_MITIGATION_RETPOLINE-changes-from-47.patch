@@ -1,4 +1,4 @@
-From a7766e7ca3f8bc358da058d20ce81115cd29308a Mon Sep 17 00:00:00 2001
+From 7571cf6b55e8040389ff22dbb39824e57b12e4b1 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Wed, 19 Jun 2024 10:33:15 +0200
 Subject: [PATCH] backport CONFIG_MITIGATION_RETPOLINE changes from 470.256.02
@@ -9,7 +9,7 @@ Subject: [PATCH] backport CONFIG_MITIGATION_RETPOLINE changes from 470.256.02
  2 files changed, 10 insertions(+), 2 deletions(-)
 
 diff --git a/nvidia-modeset/nvidia-modeset-linux.c b/nvidia-modeset/nvidia-modeset-linux.c
-index 5bed9dd..5af3b82 100644
+index ce219e7..855e791 100644
 --- a/nvidia-modeset/nvidia-modeset-linux.c
 +++ b/nvidia-modeset/nvidia-modeset-linux.c
 @@ -37,7 +37,11 @@
@@ -26,10 +26,10 @@ index 5bed9dd..5af3b82 100644
  #endif
  
 diff --git a/nvidia/nv.c b/nvidia/nv.c
-index ad64e88..2edbb82 100644
+index eb459f0..0a379fb 100644
 --- a/nvidia/nv.c
 +++ b/nvidia/nv.c
-@@ -32,7 +32,11 @@
+@@ -34,7 +34,11 @@
  #include "nv-kthread-q.h"
  #include "nv-pat.h"
  
