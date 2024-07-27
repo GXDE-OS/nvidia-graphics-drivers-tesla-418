@@ -14,7 +14,7 @@ nvidia-graphics-drivers (418.226.00-15) UNRELEASED; urgency=medium
     Linux 6.10.
   * bug-script: Report 'apt-cache policy' (535.183.06-1).
 
- -- Andreas Beckmann <anbe@debian.org>  Thu, 25 Jul 2024 10:35:32 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 27 Jul 2024 02:59:41 +0200
 
 nvidia-graphics-drivers (418.226.00-14) UNRELEASED; urgency=medium
 
