@@ -1,0 +1,53 @@
+From 771f9e73fe7f784b46b94e886d598f2dd83c75aa Mon Sep 17 00:00:00 2001
+From: Andreas Beckmann <anbe@debian.org>
+Date: Tue, 23 Jul 2024 21:49:33 +0200
+Subject: [PATCH] backport follow_pfn changes from 550.90.07
+
+---
+ conftest.sh | 23 ++++++++++++++++++-----
+ 1 file changed, 18 insertions(+), 5 deletions(-)
+
+diff --git a/conftest.sh b/conftest.sh
+index 766b4de..0e5b01f 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -693,11 +693,6 @@ compile_test() {
+             compile_check_conftest "$CODE" "NV_HASH__REMAP_4K_PFN_PRESENT" "" "functions"
+         ;;
+ 
+-        follow_pfn)
+-            # Added in v2.6.31
+-            set_configuration "NV_FOLLOW_PFN_PRESENT" "functions"
+-        ;;
+-
+         i2c_adapter)
+             # Removed in 2.6.31
+             unset_configuration "NV_I2C_ADAPTER_HAS_CLIENT_REGISTER" "types"
+@@ -4220,6 +4215,24 @@ compile_test() {
+             compile_check_conftest "$CODE" "NV_ITERATE_FD_PRESENT" "" "functions"
+         ;;
+ 
++        follow_pfn)
++            #
++            # Determine if follow_pfn() is present.
++            #
++            # follow_pfn() was added by commit 3b6748e2dd69
++            # ("mm: introduce follow_pfn()") in v2.6.31-rc1, and removed
++            # by commit 233eb0bf3b94 ("mm: remove follow_pfn")
++            # from linux-next 233eb0bf3b94.
++            #
++            CODE="
++            #include <linux/mm.h>
++            void conftest_follow_pfn(void) {
++                follow_pfn();
++            }"
++
++            compile_check_conftest "$CODE" "NV_FOLLOW_PFN_PRESENT" "" "functions"
++        ;;
++
+         drm_plane_atomic_check_has_atomic_state_arg)
+             #
+             # Determine if drm_plane_helper_funcs::atomic_check takes 'state'
+-- 
+2.20.1
+
