@@ -1,4 +1,4 @@
-nvidia-graphics-drivers-tesla-418 (418.226.00-16) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-tesla-418 (418.226.00-16) unstable; urgency=medium
 
   * Backport pfn_valid changes in nv-mmap.c from 470.239.06.
   * ppc64el: Use pfn_valid() variant with rcu_read_{,un}lock_sched() for
