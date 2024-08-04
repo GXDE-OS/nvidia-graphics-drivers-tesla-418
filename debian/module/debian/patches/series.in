@@ -11,6 +11,8 @@
 0011-backport-iosys_map-changes-from-470.129.06.patch
 0012-backport-dma_set_coherent_mask-from-470.129.06.patch
 0013-backport-acpi_bus_get_device-changes-from-470.129.06.patch
+0036-backport-pfn_valid-changes-in-nv-mmap.c-from-470.239.patch
+0044-use-pfn_valid-variant-with-rcu_read_-un-lock_sched.patch
 
 # build system updates
 bashisms.patch
