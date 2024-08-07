@@ -1,11 +1,11 @@
-nvidia-graphics-drivers-tesla-418 (418.226.00-6~deb11u2) UNRELEASED; urgency=medium
+nvidia-graphics-drivers-tesla-418 (418.226.00-6~deb11u2) bullseye; urgency=medium
 
   * Cherry-pick ppc64el changes from 418.226.00-16.
   * Backport pfn_valid changes in nv-mmap.c from 470.239.06.
   * ppc64el: Use pfn_valid() variant with rcu_read_{,un}lock_sched() for
     Linux 5.10 from 5.10.210 onwards to avoid using GPL symbols.
 
- -- Andreas Beckmann <anbe@debian.org>  Sun, 04 Aug 2024 16:35:00 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 07 Aug 2024 10:20:11 +0200
 
 nvidia-graphics-drivers-tesla-418 (418.226.00-6~deb11u1) bullseye; urgency=medium
 
