@@ -9,6 +9,9 @@ Uploaders:
  Luca Boccassi <bluca@debian.org>,
 Vcs-Browser: https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers
 Vcs-Git: https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers.git -b 390
+Homepage: https://www.nvidia.com
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
 Build-Depends:
  debhelper-compat (= 12),
  dpkg-dev (>= 1.18.8),
@@ -23,9 +26,6 @@ Build-Depends:
  linux-headers-armmp [armhf] <!nocheck>,
 Build-Conflicts-Arch:
  libglvnd-dev,
-Rules-Requires-Root: no
-Standards-Version: 4.7.0
-Homepage: https://www.nvidia.com
 Testsuite: autopkgtest-pkg-dkms
 XS-Autobuild: yes
 
@@ -50,13 +50,13 @@ Recommends:
  nvidia-persistenced,
 Suggests:
  ${nvidia:kmod:source},
-Provides:
- nvidia-driver-any,
- nvidia-glx-any,
 Breaks:
  nvidia-glx${nvidia:Variant},
 Replaces:
  nvidia-glx${nvidia:Variant},
+Provides:
+ nvidia-driver-any,
+ nvidia-glx-any,
 Description: NVIDIA metapackage${nvidia:VariantDesc}
  This metapackage depends on the NVIDIA binary driver and libraries
  that provide optimized hardware acceleration of
@@ -81,9 +81,6 @@ Pre-Depends:
 Depends:
  glx-alternative-nvidia (>= 0.8.4~) [!ppc64el],
  ${misc:Depends}
-Provides:
- nvidia-alternative-any,
- ${nvidia}-alternative--kmod-alias,
 Conflicts:
  libgldispatch0-nvidia,
  libglvnd0-nvidia,
@@ -96,6 +93,9 @@ Conflicts:
 Breaks:
  nvidia-driver (<< 343.22-2~),
  libcuda1 (<< 352.63),
+Provides:
+ nvidia-alternative-any,
+ ${nvidia}-alternative--kmod-alias,
 Description: allows the selection of NVIDIA as GLX provider${nvidia:VariantDesc}
  In setups with several NVIDIA driver versions installed (e.g. current and
  legacy) this metapackage registers an alternative to allow easy switching
@@ -117,13 +117,13 @@ Depends:
  nvidia-kernel-common (>= 20151021) [!ppc64el],
  nvidia-modprobe (>= ${nvidia:Version:major}),
  ${misc:Depends}
-Provides:
- nvidia-kernel-support-any,
- ${nvidia-kernel}-support--v1,
 Breaks:
  glx-alternative-nvidia (<< 0.6.91),
 Replaces:
  glx-alternative-nvidia (<< 0.6.91),
+Provides:
+ nvidia-kernel-support-any,
+ ${nvidia-kernel}-support--v1,
 Description: NVIDIA binary kernel module support files${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -217,13 +217,13 @@ Recommends:
  ${nvidia-settings},
 Suggests:
  ${nvidia:kmod:source},
-Provides:
- xserver-xorg-video-nvidia-any,
- ${nvidia:xorgProvides},
 Breaks:
  glx-alternative-nvidia (<< 0.6.91),
 Replaces:
  glx-alternative-nvidia (<< 0.6.91),
+Provides:
+ xserver-xorg-video-nvidia-any,
+ ${nvidia:xorgProvides},
 Description: NVIDIA binary Xorg driver${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -260,14 +260,14 @@ Depends:
  ${shlibs:Depends}, ${misc:Depends}
 Recommends:
  ${nvidia}-driver,
-Provides:
- nvidia-driver-bin-${nvidia:Version},
 Conflicts:
  nvidia-driver-bin-${nvidia:Version},
 Breaks:
  ${nvidia}-driver (<< 343.22-2~),
 Replaces:
  ${nvidia}-driver (<< 343.22-2~),
+Provides:
+ nvidia-driver-bin-${nvidia:Version},
 Description: NVIDIA driver support binaries${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -283,13 +283,13 @@ Pre-Depends:
 Depends:
  ${nvidia}-alternative (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-cfg.so.1 (= ${nvidia:Version}),
- libnvidia-cfg1-any,
 Breaks:
  libgl1-${nvidia}-glx (<< 355.11-5),
 Replaces:
  libgl1-${nvidia}-glx (<< 355.11-5),
+Provides:
+ libnvidia-cfg.so.1 (= ${nvidia:Version}),
+ libnvidia-cfg1-any,
 Description: NVIDIA binary OpenGL/GLX configuration library${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -560,8 +560,6 @@ Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-glcore-${nvidia:Version},
 Conflicts:
  libnvidia-glcore-${nvidia:Version},
  libgl1-nvidia-glx-${nvidia:Version},
@@ -798,9 +796,9 @@ Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-eglcore-${nvidia:Version},
 Conflicts:
+ libnvidia-eglcore-${nvidia:Version},
+Provides:
  libnvidia-eglcore-${nvidia:Version},
 Description: NVIDIA binary EGL core libraries${nvidia:VariantDesc}
  EGL provides a platform-agnostic mechanism for creating rendering surfaces
@@ -1089,9 +1087,9 @@ Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-compiler-${nvidia:Version},
 Conflicts:
+ libnvidia-compiler-${nvidia:Version},
+Provides:
  libnvidia-compiler-${nvidia:Version},
 Description: NVIDIA runtime compiler library${nvidia:VariantDesc}
  The Compute Unified Device Architecture (CUDA) enables NVIDIA
@@ -1246,15 +1244,15 @@ Depends:
  ${shlibs:Depends}, ${misc:Depends}
 Recommends:
  ${nvidia}-opencl-icd | opencl-icd,
+Conflicts:
+ libopencl1,
+Replaces:
+ libopencl1,
 Provides:
  libopencl1,
  libopencl-1.1-1,
  libopencl-1.2-1,
  libopencl-2.0-1,
-Conflicts:
- libopencl1,
-Replaces:
- libopencl1,
 Description: NVIDIA OpenCL ICD Loader library
  OpenCL (Open Computing Language) is a multivendor open standard for
  general-purpose parallel programming of heterogeneous systems that include
