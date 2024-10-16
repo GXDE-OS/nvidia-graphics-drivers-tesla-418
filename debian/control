@@ -313,8 +313,6 @@ Recommends:
  lib${nvidia}-cfg1 (= ${binary:Version}),
  lib${nvidia}-encode1 (= ${binary:Version}),
  ${nvidia}-vulkan-icd (= ${binary:Version}) [amd64 i386],
-Provides:
- nvidia-driver-libs-any,
 Conflicts:
  libgldispatch0-nvidia,
  libglvnd0-nvidia,
@@ -329,6 +327,8 @@ Breaks:
  libgl1-${nvidia}-glx,
  libegl1-${nvidia},
  ${nvidia}-nonglvnd-vulkan-icd,
+Provides:
+ nvidia-driver-libs-any,
 Description: NVIDIA metapackage (OpenGL/GLX/EGL/GLES libraries)${nvidia:VariantDesc}
  This metapackage depends on the NVIDIA binary libraries
  that provide optimized hardware acceleration of
@@ -361,8 +361,6 @@ Recommends:
  libgles-${nvidia-}2 (= ${binary:Version}),
  lib${nvidia}-cfg1 (= ${binary:Version}),
  ${nvidia}-nonglvnd-vulkan-icd (= ${binary:Version}) [amd64 i386],
-Provides:
- nvidia-driver-libs-any,
 Conflicts:
  libgldispatch0-nvidia,
  libglvnd0-nvidia,
@@ -376,6 +374,8 @@ Breaks:
  ${nvidia}-driver-libs,
  libgl1-${nvidia}-glvnd-glx,
  ${nvidia}-vulkan-icd,
+Provides:
+ nvidia-driver-libs-any,
 Description: NVIDIA metapackage (non-GLVND OpenGL/GLX/EGL/GLES libraries)${nvidia:VariantDescShort}
  This metapackage depends on the (non-GLVND) NVIDIA binary libraries
  that provide optimized hardware acceleration of
@@ -402,8 +402,6 @@ Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- glvnd-nvidia-abi-375.20,
 Conflicts:
  libglvnd0,
  libgldispatch0,
@@ -413,6 +411,8 @@ Replaces:
  libglvnd0,
  libgldispatch0,
  libgldispatch0-nvidia,
+Provides:
+ glvnd-nvidia-abi-375.20,
 Description: Vendor neutral GL dispatch library -- libGLdispatch
  This is an implementation of the vendor-neutral dispatch layer for
  arbitrating OpenGL API calls between multiple vendors on a per-screen basis.
@@ -537,10 +537,10 @@ Recommends:
  ${nvidia:kmod:binary},
 Suggests:
  ${nvidia:kmod:source},
-Provides:
- libgl1-nvidia-glx-any,
 Conflicts:
  libgl1-${nvidia}-glvnd-glx,
+Provides:
+ libgl1-nvidia-glx-any,
 Description: NVIDIA binary OpenGL/GLX library (non-GLVND variant)${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -567,6 +567,8 @@ Breaks:
  libgl1-${nvidia}-glx (<< 355.11-5),
 Replaces:
  libgl1-${nvidia}-glx (<< 355.11-5),
+Provides:
+ libnvidia-glcore-${nvidia:Version},
 Description: NVIDIA binary OpenGL/GLX core libraries${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
  OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
@@ -909,11 +911,11 @@ Suggests:
  vulkan-tools,
 Enhances:
  libvulkan1,
+Conflicts:
+ ${nvidia}-nonglvnd-vulkan-icd,
 Provides:
  vulkan-icd,
  nvidia-vulkan-icd-any,
-Conflicts:
- ${nvidia}-nonglvnd-vulkan-icd,
 Description: NVIDIA Vulkan installable client driver (ICD)${nvidia:VariantDesc}
  Vulkan is a multivendor open standard by the Khronos Group for 3D graphics.
  .
@@ -950,11 +952,11 @@ Suggests:
  vulkan-tools,
 Enhances:
  libvulkan1,
+Conflicts:
+ ${nvidia}-vulkan-icd,
 Provides:
  vulkan-icd,
  nvidia-vulkan-icd-any,
-Conflicts:
- ${nvidia}-vulkan-icd,
 Description: NVIDIA Vulkan ICD (non-GLVND variant)${nvidia:VariantDesc}
  Vulkan is a multivendor open standard by the Khronos Group for 3D graphics.
  .
@@ -1106,9 +1108,9 @@ Pre-Depends:
 Depends:
  lib${nvidia}-ptxjitcompiler1 (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-fatbinaryloader-${nvidia:Version},
 Conflicts:
+ libnvidia-fatbinaryloader-${nvidia:Version},
+Provides:
  libnvidia-fatbinaryloader-${nvidia:Version},
 Description: NVIDIA FAT binary loader${nvidia:VariantDesc}
  The Compute Unified Device Architecture (CUDA) enables NVIDIA
