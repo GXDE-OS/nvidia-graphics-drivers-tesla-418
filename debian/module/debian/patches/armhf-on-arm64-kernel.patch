@@ -1,6 +1,6 @@
 Author: Andreas Beckmann <anbe@debian.org>
 Description: (HACK!) fix ARCH detection for armhf running on arm64
- since the 390xx series does not support arm64 at all, just map
+ since the 340xx/390xx series do not support arm64 at all, just map
  armv8l to arm, too, to fix building the kernel module in armhf
  chroots running on arm64 hosts
 

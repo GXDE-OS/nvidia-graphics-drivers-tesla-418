@@ -62,7 +62,8 @@ nvidia-graphics-drivers (390.157-9+git) UNRELEASED; urgency=medium
 
 nvidia-graphics-drivers (390.157-9) UNRELEASED; urgency=medium
 
-  * Backport nv_get_kern_phys_address() changes from 555.42.02.
+  * Backport nv_get_kern_phys_address() changes from 555.42.02 to fix kernel
+    module build with gcc-14 on arm*.
 
  -- Andreas Beckmann <anbe@debian.org>  Wed, 16 Oct 2024 10:12:44 +0200
 
@@ -2898,7 +2899,10 @@ nvidia-graphics-drivers (343.22-1) experimental; urgency=medium
 
 nvidia-graphics-drivers (340.108-2) UNRELEASED; urgency=medium
 
-  * Backport nv_get_kern_phys_address() changes from 555.42.02.
+  * Backport nv_get_kern_phys_address() changes from 555.42.02 to fix kernel
+    module build with gcc-14 on arm*.
+  * Work around architecture misdetection when building the kernel modules in
+    an armhf environment on an arm64 host.
 
   * Inject -Wno-error=implicit-function-declaration etc. into conftest to fix
     kernel module build with gcc-14.
