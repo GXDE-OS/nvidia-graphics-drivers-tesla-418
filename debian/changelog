@@ -65,7 +65,7 @@ nvidia-graphics-drivers (390.157-9) UNRELEASED; urgency=medium
   * Backport nv_get_kern_phys_address() changes from 555.42.02 to fix kernel
     module build with gcc-14 on arm*.
 
- -- Andreas Beckmann <anbe@debian.org>  Wed, 16 Oct 2024 10:12:44 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 04 Nov 2024 09:16:04 +0100
 
 nvidia-graphics-drivers (390.157-8) UNRELEASED; urgency=medium
 
