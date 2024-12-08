@@ -1,4 +1,4 @@
-nvidia-graphics-drivers (390.157-9+git) UNRELEASED; urgency=medium
+nvidia-graphics-drivers (390.157-10+git) UNRELEASED; urgency=medium
 
   [ Andreas Beckmann ]
   * Allow alternative libnvidia-{tesla,legacy}-*-cfg1 packages to substitute
@@ -59,6 +59,13 @@ nvidia-graphics-drivers (390.157-9+git) UNRELEASED; urgency=medium
   * Remove myself from Uploaders.
 
  -- Andreas Beckmann <anbe@debian.org>  Wed, 23 Nov 2022 23:52:39 +0100
+
+nvidia-graphics-drivers (390.157-10) UNRELEASED; urgency=medium
+
+  * Backport drm_output_poll_changed changes from 535.216.01 to fix kernel
+    module build for Linux 6.12.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 08 Dec 2024 10:16:14 +0100
 
 nvidia-graphics-drivers (390.157-9) UNRELEASED; urgency=medium
 
