@@ -27,9 +27,9 @@ do-div-cast.patch
 0043-backport-follow_pfn-changes-from-550.90.07.patch
 0046-backport-nv_get_kern_phys_address-changes-from-555.4.patch
 0047-backport-drm_output_poll_changed-changes-from-535.21.patch
-0049-fix-more-warnings.patch
-#HAS_UVM#0050-fix-more-uvm-warnings.patch
-0052-backport-cmd_symlink-changes-from-550.142.patch
+0048-backport-cmd_symlink-changes-from-550.142.patch
+0053-fix-more-warnings.patch
+#HAS_UVM#0054-fix-more-uvm-warnings.patch
 
 # build system updates
 fragile-ARCH.patch
