@@ -1,18 +1,20 @@
-From bebc9af5f0f0a587210d5ceff891ed4a3e631525 Mon Sep 17 00:00:00 2001
+From afe70c7f39afc8f845a249017493b9de4d6741de Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Thu, 19 Dec 2024 13:42:55 +0100
 Subject: [PATCH] backport cmd_symlink changes from 550.142
 
 ---
- nvidia-modules-common.mk | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ Kbuild                               | 14 ++++++++++++++
+ nvidia-modeset/nvidia-modeset.Kbuild |  3 ---
+ nvidia/nvidia.Kbuild                 |  3 ---
+ 3 files changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/nvidia-modules-common.mk b/nvidia-modules-common.mk
-index 0f1b5166..6a8b15d5 100644
---- a/nvidia-modules-common.mk
-+++ b/nvidia-modules-common.mk
-@@ -138,6 +138,19 @@ MOD_SIGN_CMD ?= $(KERNEL_SOURCES)/scripts/sign-file
- # to satisfy KBUILD requirements and to support NVIDIA specifics.
+diff --git a/Kbuild b/Kbuild
+index 85aa267c..63da3d95 100644
+--- a/Kbuild
++++ b/Kbuild
+@@ -50,6 +50,20 @@ ASSIGN_PER_OBJ_CFLAGS = \
+ # - Tie into conftest (see the description below).
  #
  
 +#
@@ -28,9 +30,38 @@ index 0f1b5166..6a8b15d5 100644
 +quiet_cmd_symlink = SYMLINK $@
 + cmd_symlink = ln -sf $(abspath $<) $@
 +
- $(obj)/$(CORE_OBJS):
- 	@cp $(src)/$(CORE_OBJS) $(obj)/$(CORE_OBJS)
++
+ $(foreach _module, $(NV_KERNEL_MODULES), \
+  $(eval include $(src)/$(_module)/$(_module).Kbuild))
  
+diff --git a/nvidia-modeset/nvidia-modeset.Kbuild b/nvidia-modeset/nvidia-modeset.Kbuild
+index 8a7645d3..8debf27a 100644
+--- a/nvidia-modeset/nvidia-modeset.Kbuild
++++ b/nvidia-modeset/nvidia-modeset.Kbuild
+@@ -38,9 +38,6 @@ NV_KERNEL_MODULE_TARGETS += $(NVIDIA_MODESET_KO)
+ NVIDIA_MODESET_BINARY_OBJECT := $(src)/nvidia-modeset/nv-modeset-kernel.o_binary
+ NVIDIA_MODESET_BINARY_OBJECT_O := nvidia-modeset/nv-modeset-kernel.o
+ 
+-quiet_cmd_symlink = SYMLINK $@
+-cmd_symlink = ln -sf $< $@
+-
+ targets += $(NVIDIA_MODESET_BINARY_OBJECT_O)
+ 
+ $(obj)/$(NVIDIA_MODESET_BINARY_OBJECT_O): $(NVIDIA_MODESET_BINARY_OBJECT) FORCE
+diff --git a/nvidia/nvidia.Kbuild b/nvidia/nvidia.Kbuild
+index 109f3d37..58a2219c 100644
+--- a/nvidia/nvidia.Kbuild
++++ b/nvidia/nvidia.Kbuild
+@@ -40,9 +40,6 @@ NVIDIA_KO = nvidia/nvidia.ko
+ NVIDIA_BINARY_OBJECT := $(src)/nvidia/nv-kernel.o_binary
+ NVIDIA_BINARY_OBJECT_O := nvidia/nv-kernel.o
+ 
+-quiet_cmd_symlink = SYMLINK $@
+- cmd_symlink = ln -sf $< $@
+-
+ targets += $(NVIDIA_BINARY_OBJECT_O)
+ 
+ $(obj)/$(NVIDIA_BINARY_OBJECT_O): $(NVIDIA_BINARY_OBJECT) FORCE
 -- 
 2.39.5
 
