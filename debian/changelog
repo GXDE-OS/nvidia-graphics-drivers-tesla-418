@@ -67,7 +67,7 @@ nvidia-graphics-drivers (390.157-10) UNRELEASED; urgency=medium
   * Backport warning fixes from 396.18, 415.13, 418.30, 430.09, 435.17,
     510.39.01, 535.146.02, 535.216.01 and 560.28.03.
 
- -- Andreas Beckmann <anbe@debian.org>  Sun, 08 Dec 2024 10:16:14 +0100
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 21 Dec 2024 22:50:00 +0100
 
 nvidia-graphics-drivers (390.157-9) UNRELEASED; urgency=medium
 
