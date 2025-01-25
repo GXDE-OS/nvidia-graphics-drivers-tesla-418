@@ -1,4 +1,4 @@
-nvidia-graphics-drivers (390.157-10+git) UNRELEASED; urgency=medium
+nvidia-graphics-drivers (390.157-11+git) UNRELEASED; urgency=medium
 
   [ Andreas Beckmann ]
   * Allow alternative libnvidia-{tesla,legacy}-*-cfg1 packages to substitute
@@ -59,6 +59,12 @@ nvidia-graphics-drivers (390.157-10+git) UNRELEASED; urgency=medium
   * Remove myself from Uploaders.
 
  -- Andreas Beckmann <anbe@debian.org>  Wed, 23 Nov 2022 23:52:39 +0100
+
+nvidia-graphics-drivers (390.157-11) UNRELEASED; urgency=medium
+
+  * Do not test building modules for the removed i386 kernels.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 25 Jan 2025 13:36:30 +0100
 
 nvidia-graphics-drivers (390.157-10) UNRELEASED; urgency=medium
 
@@ -2909,6 +2915,7 @@ nvidia-graphics-drivers (343.22-1) experimental; urgency=medium
 nvidia-graphics-drivers (340.108-2) UNRELEASED; urgency=medium
 
   * Fix warnings during module build.
+  * Do not test building modules for the removed i386 kernels.
 
   * Backport nv_get_kern_phys_address() changes from 555.42.02 to fix kernel
     module build with gcc-14 on arm*.
