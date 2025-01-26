@@ -1,4 +1,4 @@
-From 1d8a301415b770325e56778b8e7f66d16a83d02b Mon Sep 17 00:00:00 2001
+From 5210e8b1c00107d32656bdba4c05e753d055b74e Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Sun, 8 Dec 2024 03:20:30 +0100
 Subject: [PATCH] backport uvm warning fixes from 510.39.01
@@ -8,10 +8,10 @@ Subject: [PATCH] backport uvm warning fixes from 510.39.01
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/nvidia-uvm/uvm8_pascal_mmu.c b/nvidia-uvm/uvm8_pascal_mmu.c
-index b3bf7b68..620b8a02 100644
+index 61124993..98b5a2f3 100644
 --- a/nvidia-uvm/uvm8_pascal_mmu.c
 +++ b/nvidia-uvm/uvm8_pascal_mmu.c
-@@ -168,7 +168,7 @@ static NvLength entry_size_pascal(NvU32 depth)
+@@ -170,7 +170,7 @@ static NvLength entry_size_pascal(NvU32 depth)
  
  static NvU32 index_bits_pascal(NvU32 depth, NvU32 page_size)
  {

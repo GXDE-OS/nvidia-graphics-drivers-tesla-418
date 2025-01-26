@@ -1,24 +1,25 @@
-From 44602cd193f58f7279e39a6fbd02bf98e0a25cd8 Mon Sep 17 00:00:00 2001
+From ac02ac883c2c6d156bba14eab9623a90157997e4 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Sun, 8 Dec 2024 03:20:30 +0100
 Subject: [PATCH] backport warning fixes from 535.216.01
 
 ---
- common/inc/nv-linux.h                 | 12 ++++++++++++
+ common/inc/nv-linux.h                 | 10 ++++++++++
  nvidia-modeset/nvidia-modeset-linux.c |  4 ++--
+ nvidia/linux_nvswitch.c               |  3 ++-
  nvidia/nv-dma.c                       |  2 +-
  nvidia/nv-ibmnpu.c                    |  2 +-
  nvidia/nv-kthread-q-selftest.c        |  2 +-
  nvidia/nv-mmap.c                      |  4 ++--
  nvidia/nv-procfs.c                    |  2 +-
  nvidia/nvlink_linux.c                 |  1 +
- 8 files changed, 21 insertions(+), 8 deletions(-)
+ 9 files changed, 21 insertions(+), 9 deletions(-)
 
 diff --git a/common/inc/nv-linux.h b/common/inc/nv-linux.h
-index 2bb311c8..6c6b9eda 100644
+index b4641466..03c56545 100644
 --- a/common/inc/nv-linux.h
 +++ b/common/inc/nv-linux.h
-@@ -540,7 +540,9 @@ static inline void *nv_vmalloc(unsigned long size)
+@@ -566,7 +566,9 @@ static inline void *nv_vmalloc(unsigned long size)
      void *ptr = __vmalloc(size, GFP_KERNEL);
  #endif
      if (ptr)
@@ -28,7 +29,7 @@ index 2bb311c8..6c6b9eda 100644
      return ptr;
  }
  
-@@ -554,7 +556,9 @@ static inline void *nv_ioremap(NvU64 phys, NvU64 size)
+@@ -580,7 +582,9 @@ static inline void *nv_ioremap(NvU64 phys, NvU64 size)
  {
      void *ptr = ioremap(phys, size);
      if (ptr)
@@ -38,19 +39,9 @@ index 2bb311c8..6c6b9eda 100644
      return ptr;
  }
  
-@@ -566,7 +570,9 @@ static inline void *nv_ioremap_nocache(NvU64 phys, NvU64 size)
-     void *ptr = ioremap(phys, size);
- #endif
-     if (ptr)
-+    {
-         NV_MEMDBG_ADD(ptr, size);
-+    }
-     return ptr;
- }
- 
-@@ -575,7 +581,9 @@ static inline void *nv_ioremap_cache(NvU64 phys, NvU64 size)
- #if defined(NV_IOREMAP_CACHE_PRESENT)
-     void *ptr = ioremap_cache(phys, size);
+@@ -612,7 +616,9 @@ static inline void *nv_ioremap_cache(NvU64 phys, NvU64 size)
+     //
+     void *ptr = ioremap_prot(phys, size, pgprot_val(PAGE_KERNEL));
      if (ptr)
 +    {
          NV_MEMDBG_ADD(ptr, size);
@@ -58,7 +49,7 @@ index 2bb311c8..6c6b9eda 100644
      return ptr;
  #else
      return nv_ioremap(phys, size);
-@@ -587,7 +595,9 @@ static inline void *nv_ioremap_wc(NvU64 phys, NvU64 size)
+@@ -624,7 +630,9 @@ static inline void *nv_ioremap_wc(NvU64 phys, NvU64 size)
  #if defined(NV_IOREMAP_WC_PRESENT)
      void *ptr = ioremap_wc(phys, size);
      if (ptr)
@@ -68,7 +59,7 @@ index 2bb311c8..6c6b9eda 100644
      return ptr;
  #else
      return nv_ioremap_nocache(phys, size);
-@@ -652,7 +662,9 @@ static inline NvUPtr nv_vmap(struct page **pages, NvU32 page_count,
+@@ -703,7 +711,9 @@ static inline NvUPtr nv_vmap(struct page **pages, NvU32 page_count,
      /* All memory cached in PPC64LE; can't honor 'cached' input. */
      ptr = vmap(pages, page_count, VM_MAP, prot);
      if (ptr)
@@ -79,7 +70,7 @@ index 2bb311c8..6c6b9eda 100644
  }
  
 diff --git a/nvidia-modeset/nvidia-modeset-linux.c b/nvidia-modeset/nvidia-modeset-linux.c
-index 5af3b827..35093b5d 100644
+index 855e791e..a6e6768f 100644
 --- a/nvidia-modeset/nvidia-modeset-linux.c
 +++ b/nvidia-modeset/nvidia-modeset-linux.c
 @@ -766,7 +766,7 @@ static void nvkms_kapi_event_kthread_q_callback(void *arg)
@@ -100,8 +91,29 @@ index 5af3b827..35093b5d 100644
  (
      struct nvkms_per_open *popen,
      NvU32 cmd, NvU64 address, const size_t size
+diff --git a/nvidia/linux_nvswitch.c b/nvidia/linux_nvswitch.c
+index 70897470..01970149 100644
+--- a/nvidia/linux_nvswitch.c
++++ b/nvidia/linux_nvswitch.c
+@@ -30,6 +30,7 @@
+ #include "nvlink_common.h"
+ #include "nvlink_errors.h"
+ #include "nv-kthread-q.h"
++#include "nvlink_proto.h"
+ 
+ #include <linux/module.h>
+ #include <linux/interrupt.h>
+@@ -49,7 +50,7 @@
+ #include "export_nvswitch.h"
+ #include "ioctl_nvswitch.h"
+ 
+-const static struct
++static const struct
+ {
+     NvlStatus status;
+     int err;
 diff --git a/nvidia/nv-dma.c b/nvidia/nv-dma.c
-index a06c12c0..343e878d 100644
+index 129b5200..048b2608 100644
 --- a/nvidia/nv-dma.c
 +++ b/nvidia/nv-dma.c
 @@ -221,7 +221,7 @@ void nv_destroy_dma_map_scatterlist(nv_dma_map_t *dma_map)
@@ -114,7 +126,7 @@ index a06c12c0..343e878d 100644
      NvU64 *va_array
  )
 diff --git a/nvidia/nv-ibmnpu.c b/nvidia/nv-ibmnpu.c
-index 50503e1c..b53b5c12 100644
+index 3d3a8ce0..b5c62cd7 100644
 --- a/nvidia/nv-ibmnpu.c
 +++ b/nvidia/nv-ibmnpu.c
 @@ -25,9 +25,9 @@
@@ -125,9 +137,9 @@ index 50503e1c..b53b5c12 100644
  
  #if defined(NVCPU_PPC64LE)
 -#include "nv-ibmnpu.h"
+ #include "nv-rsync.h"
  
  #include "nvlink_common.h"
- #include "nvlink_errors.h"
 diff --git a/nvidia/nv-kthread-q-selftest.c b/nvidia/nv-kthread-q-selftest.c
 index a8db326c..61f01fbc 100644
 --- a/nvidia/nv-kthread-q-selftest.c
@@ -142,10 +154,10 @@ index a8db326c..61f01fbc 100644
      (void)NULL;
  }
 diff --git a/nvidia/nv-mmap.c b/nvidia/nv-mmap.c
-index 3be5079a..e1b8b0ed 100644
+index af53116d..8c9133b2 100644
 --- a/nvidia/nv-mmap.c
 +++ b/nvidia/nv-mmap.c
-@@ -270,7 +270,7 @@ int nv_encode_caching(
+@@ -264,7 +264,7 @@ int nv_encode_caching(
      return 0;
  }
  
@@ -154,7 +166,7 @@ index 3be5079a..e1b8b0ed 100644
      struct vm_area_struct *vma,
      nv_alloc_t *at,
      NvU64 page_index,
-@@ -291,7 +291,7 @@ int static nvidia_mmap_peer_io(
+@@ -285,7 +285,7 @@ int static nvidia_mmap_peer_io(
      return ret;
  }
  
@@ -164,10 +176,10 @@ index 3be5079a..e1b8b0ed 100644
      nv_alloc_t *at,
      NvU64 page_index,
 diff --git a/nvidia/nv-procfs.c b/nvidia/nv-procfs.c
-index 167b21ff..aed77173 100644
+index 30fc2c4a..b0fcd0ab 100644
 --- a/nvidia/nv-procfs.c
 +++ b/nvidia/nv-procfs.c
-@@ -426,7 +426,7 @@ static nv_proc_ops_t nv_procfs_registry_fops = {
+@@ -448,7 +448,7 @@ static nv_proc_ops_t nv_procfs_registry_fops = {
  /*
   * Forwards error to nv_log_error which exposes data to vendor callback
   */
@@ -177,7 +189,7 @@ index 167b21ff..aed77173 100644
      nv_state_t *nv,
      NvU32 err,
 diff --git a/nvidia/nvlink_linux.c b/nvidia/nvlink_linux.c
-index ba57b86d..343cb844 100644
+index 6e1c799f..95195d06 100644
 --- a/nvidia/nvlink_linux.c
 +++ b/nvidia/nvlink_linux.c
 @@ -27,6 +27,7 @@

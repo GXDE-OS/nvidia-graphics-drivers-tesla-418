@@ -11,8 +11,8 @@ nvidia-graphics-drivers (418.226.00-17) UNRELEASED; urgency=medium
 
   * Backport drm_output_poll_changed changes from 535.216.01 to fix kernel
     module build for Linux 6.12.
-  * Backport warning fixes from 396.18, 415.13, 418.30, 430.09, 435.17,
-    510.39.01, 535.146.02, 535.216.01 and 560.28.03.
+  * Backport warning fixes from 430.09, 435.17, 510.39.01, 535.146.02,
+    535.216.01, 535.230.02 and 560.28.03.
   * Simplify using nv_pfn_valid() in virt_addr_valid() on ppc64el.
   * Backport nv_get_kern_phys_address() changes from 555.42.02 to fix kernel
     module build with gcc-14 on arm*.

@@ -1,4 +1,4 @@
-From 37e2ef811c9d175b72cb829f3d82c6c35e70a636 Mon Sep 17 00:00:00 2001
+From 32464156f0b644299dd18bb8a0fcd8752dd0bbb5 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Sun, 8 Dec 2024 03:13:49 +0100
 Subject: [PATCH] backport drm_output_poll_changed changes from 535.216.01
@@ -10,10 +10,10 @@ Subject: [PATCH] backport drm_output_poll_changed changes from 535.216.01
  3 files changed, 28 insertions(+)
 
 diff --git a/conftest.sh b/conftest.sh
-index 9b7d08cd..41c13b49 100755
+index 0e5b01fa..c6f0cc8d 100755
 --- a/conftest.sh
 +++ b/conftest.sh
-@@ -4874,6 +4874,29 @@ compile_test() {
+@@ -4410,6 +4410,29 @@ compile_test() {
              compile_check_conftest "$CODE" "NV_DRM_DRIVER_HAS_DUMB_DESTROY" "" "types"
          ;;
  
@@ -44,7 +44,7 @@ index 9b7d08cd..41c13b49 100755
              # Determine if DRM_UNLOCKED IOCTL flag is present.
              #
 diff --git a/nvidia-drm/nvidia-drm-drv.c b/nvidia-drm/nvidia-drm-drv.c
-index 286d7042..068450b8 100644
+index c8b0fd77..a7dd97a7 100644
 --- a/nvidia-drm/nvidia-drm-drv.c
 +++ b/nvidia-drm/nvidia-drm-drv.c
 @@ -87,6 +87,7 @@ static struct nv_drm_device *dev_list = NULL;
@@ -74,10 +74,10 @@ index 286d7042..068450b8 100644
  
  static void nv_drm_event_callback(const struct NvKmsKapiEvent *event)
 diff --git a/nvidia-drm/nvidia-drm.Kbuild b/nvidia-drm/nvidia-drm.Kbuild
-index 47d60fef..639168ee 100644
+index 6076de17..cfea2f5b 100644
 --- a/nvidia-drm/nvidia-drm.Kbuild
 +++ b/nvidia-drm/nvidia-drm.Kbuild
-@@ -110,3 +110,4 @@ NV_CONFTEST_TYPE_COMPILE_TESTS += reservation_object_reserve_shared_has_num_fenc
+@@ -109,3 +109,4 @@ NV_CONFTEST_TYPE_COMPILE_TESTS += dma_resv_add_fence
  NV_CONFTEST_TYPE_COMPILE_TESTS += drm_connector_has_override_edid
  NV_CONFTEST_TYPE_COMPILE_TESTS += drm_driver_has_dumb_destroy
  NV_CONFTEST_TYPE_COMPILE_TESTS += drm_unlocked_ioctl_flag_present

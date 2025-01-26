@@ -50,7 +50,7 @@ Description: dump the generated conftest headers
  
  clean-dirs := $(obj)/conftest
  
-@@ -184,7 +200,8 @@ BUILD_SANITY_CHECKS = \
+@@ -198,7 +215,8 @@ BUILD_SANITY_CHECKS = \
  
  .PHONY: $(BUILD_SANITY_CHECKS)
  

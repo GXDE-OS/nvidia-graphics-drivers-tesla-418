@@ -39,7 +39,7 @@ Description: use KBUILD_CFLAGS and (KBUILD_)LDFLAGS
  #
 --- a/Makefile
 +++ b/Makefile
-@@ -120,7 +120,7 @@ else
+@@ -124,7 +124,7 @@ else
    # cannot be defined in the *Kbuild files, which are only used during stage 1.
  
    %-linux.o: modules

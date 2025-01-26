@@ -1,4 +1,4 @@
-From 12a46c5e067099b89746bfdbaba97f8a70099acd Mon Sep 17 00:00:00 2001
+From a95182cf2bf8caf2e37e9fdb584457c2fe24b39b Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Fri, 24 Jan 2025 12:37:59 +0100
 Subject: [PATCH] backport uvm fixes from 535.230.02
@@ -10,7 +10,7 @@ Subject: [PATCH] backport uvm fixes from 535.230.02
  3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/nvidia-uvm/uvm8_kvmalloc.c b/nvidia-uvm/uvm8_kvmalloc.c
-index f17ed521..5cbff2c7 100644
+index 1bff17b7..795afbe5 100644
 --- a/nvidia-uvm/uvm8_kvmalloc.c
 +++ b/nvidia-uvm/uvm8_kvmalloc.c
 @@ -35,7 +35,7 @@
@@ -23,10 +23,10 @@ index f17ed521..5cbff2c7 100644
  
  typedef struct
 diff --git a/nvidia-uvm/uvm8_mmu.h b/nvidia-uvm/uvm8_mmu.h
-index cddd43f7..cf50c952 100644
+index 1039c2b2..1c8fc31a 100644
 --- a/nvidia-uvm/uvm8_mmu.h
 +++ b/nvidia-uvm/uvm8_mmu.h
-@@ -76,7 +76,7 @@ struct uvm_page_directory_struct
+@@ -84,7 +84,7 @@ struct uvm_page_directory_struct
  
      // pointers to child directories on the host.
      // this array is variable length, so it needs to be last to allow it to take up extra space
@@ -36,10 +36,10 @@ index cddd43f7..cf50c952 100644
  
  struct uvm_mmu_mode_hal_struct
 diff --git a/nvidia-uvm/uvm8_pmm_gpu.c b/nvidia-uvm/uvm8_pmm_gpu.c
-index 602a2867..6f0857e4 100644
+index 992144b7..db8efb44 100644
 --- a/nvidia-uvm/uvm8_pmm_gpu.c
 +++ b/nvidia-uvm/uvm8_pmm_gpu.c
-@@ -209,7 +209,7 @@ struct uvm_pmm_gpu_chunk_suballoc_struct
+@@ -219,7 +219,7 @@ struct uvm_pmm_gpu_chunk_suballoc_struct
      // Array of all child subchunks
      // TODO: Bug 1765461: Can the array be inlined? It could save the parent
      //       pointer.

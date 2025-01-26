@@ -45,9 +45,6 @@ bashisms.patch
 0046-backport-nv_get_kern_phys_address-changes-from-555.4.patch
 0047-backport-drm_output_poll_changed-changes-from-535.21.patch
 0048-backport-cmd_symlink-changes-from-550.142.patch
-0049-backport-uvm-warning-fixes-from-396.18.patch
-0049-backport-uvm-warning-fixes-from-415.13.patch
-0049-backport-uvm-warning-fixes-from-418.30.patch
 0049-backport-warning-fixes-from-430.09.patch
 0049-backport-uvm-warning-fixes-from-435.17.patch
 0049-backport-uvm-warning-fixes-from-510.39.01.patch
