@@ -1,0 +1,24 @@
+From 3892b622e7b2cb4a20cb05f55d0c21d830b15f5e Mon Sep 17 00:00:00 2001
+From: Andreas Beckmann <anbe@debian.org>
+Date: Wed, 18 Dec 2024 01:06:41 +0100
+Subject: [PATCH] backport warning fixes from 430.09
+
+---
+ nvidia/nv-kthread-q.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/nvidia/nv-kthread-q.c b/nvidia/nv-kthread-q.c
+index 533d3ebc..838bdfb1 100644
+--- a/nvidia/nv-kthread-q.c
++++ b/nvidia/nv-kthread-q.c
+@@ -224,6 +224,7 @@ static void _q_flush_function(void *args)
+ }
+ 
+ 
++static
+ void _raw_q_flush(nv_kthread_q_t *q)
+ {
+     nv_kthread_q_item_t q_item;
+-- 
+2.39.5
+

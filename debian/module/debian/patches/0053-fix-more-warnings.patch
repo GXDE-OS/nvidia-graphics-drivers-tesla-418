@@ -1,0 +1,108 @@
+From 85cd3e34715e2fc7bb13ccc1cc48ed670853c43c Mon Sep 17 00:00:00 2001
+From: Andreas Beckmann <anbe@debian.org>
+Date: Sun, 8 Dec 2024 22:13:22 +0100
+Subject: [PATCH] fix more warnings
+
+---
+ common/inc/nv-linux.h                 | 8 ++++++++
+ nvidia-modeset/nvidia-modeset-linux.c | 1 +
+ nvidia/nv-instance.c                  | 1 +
+ nvidia/nv-mmap.c                      | 1 +
+ nvidia/nv-vm.c                        | 2 +-
+ 5 files changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/common/inc/nv-linux.h b/common/inc/nv-linux.h
+index 03c56545..150440ac 100644
+--- a/common/inc/nv-linux.h
++++ b/common/inc/nv-linux.h
+@@ -598,7 +598,9 @@ static inline void *nv_ioremap_cache(NvU64 phys, NvU64 size)
+ #if defined(NV_IOREMAP_CACHE_PRESENT)
+     void *ptr = ioremap_cache(phys, size);
+     if (ptr)
++    {
+         NV_MEMDBG_ADD(ptr, size);
++    }
+     return ptr;
+ #elif defined(NVCPU_PPC64LE)
+     //
+@@ -649,14 +651,18 @@ static inline void nv_iounmap(void *ptr, NvU64 size)
+     { \
+         (ptr) = kmalloc(size, NV_GFP_KERNEL); \
+         if (ptr) \
++        { \
+             NV_MEMDBG_ADD(ptr, size); \
++        } \
+     }
+ 
+ #define NV_KMALLOC_ATOMIC(ptr, size) \
+     { \
+         (ptr) = kmalloc(size, NV_GFP_ATOMIC); \
+         if (ptr) \
++        { \
+             NV_MEMDBG_ADD(ptr, size); \
++        } \
+     }
+ 
+ #if defined(__GFP_RETRY_MAYFAIL)
+@@ -671,7 +677,9 @@ static inline void nv_iounmap(void *ptr, NvU64 size)
+     { \
+         (ptr) = kmalloc(size, NV_GFP_NO_OOM); \
+         if (ptr) \
++        { \
+             NV_MEMDBG_ADD(ptr, size); \
++        } \
+     }
+ 
+ #define NV_KFREE(ptr, size) \
+diff --git a/nvidia-modeset/nvidia-modeset-linux.c b/nvidia-modeset/nvidia-modeset-linux.c
+index a6e6768f..8fa7b2fa 100644
+--- a/nvidia-modeset/nvidia-modeset-linux.c
++++ b/nvidia-modeset/nvidia-modeset-linux.c
+@@ -818,6 +818,7 @@ failed:
+     return NULL;
+ }
+ 
++static
+ void NVKMS_API_CALL nvkms_close_common(struct nvkms_per_open *popen)
+ {
+     /*
+diff --git a/nvidia/nv-instance.c b/nvidia/nv-instance.c
+index 72fcdf63..e223340b 100644
+--- a/nvidia/nv-instance.c
++++ b/nvidia/nv-instance.c
+@@ -13,6 +13,7 @@
+ #include "nv-linux.h"
+ #include "nv-frontend.h"
+ #include "nv-pci-table.h"
++#include "nv-instance.h"
+ 
+ #define MODULE_BASE_NAME "nvidia"
+ #define MODULE_INSTANCE_NUMBER 0
+diff --git a/nvidia/nv-mmap.c b/nvidia/nv-mmap.c
+index 8c9133b2..133c45fc 100644
+--- a/nvidia/nv-mmap.c
++++ b/nvidia/nv-mmap.c
+@@ -255,6 +255,7 @@ int nv_encode_caching(
+         case NV_MEMORY_CACHED:
+             if (NV_ALLOW_CACHING(memory_type))
+                 break;
++            __attribute__((__fallthrough__));
+         default:
+             nv_printf(NV_DBG_ERRORS,
+                 "NVRM: VM: cache type %d not supported for memory type %d!\n",
+diff --git a/nvidia/nv-vm.c b/nvidia/nv-vm.c
+index 6cd9f1a9..8b22ab7f 100644
+--- a/nvidia/nv-vm.c
++++ b/nvidia/nv-vm.c
+@@ -329,7 +329,7 @@ static unsigned int nv_compute_gfp_mask(
+     if (!nv || !nv_requires_dma_remap(nv) || nv_is_dma_direct(&dev->dev) || nv->force_dma32_alloc)
+     {
+         NvU64 max_sysmem_address = nv_get_max_sysmem_address();
+-        if (dev && (dev->dma_mask < max_sysmem_address) ||
++        if ((dev && (dev->dma_mask < max_sysmem_address)) ||
+             (nv && nv->force_dma32_alloc))
+         {
+             gfp_mask = NV_GFP_DMA32;
+-- 
+2.39.5
+

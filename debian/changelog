@@ -1,10 +1,14 @@
 nvidia-graphics-drivers-tesla-418 (418.226.00-17) UNRELEASED; urgency=medium
 
+  * Backport drm_output_poll_changed changes from 535.216.01 to fix kernel
+    module build for Linux 6.12.  (Closes: #1090248)
+  * Backport warning fixes from 430.09, 435.17, 510.39.01, 535.146.02,
+    535.216.01, 535.230.02 and 560.28.03.
   * Simplify using nv_pfn_valid() in virt_addr_valid() on ppc64el.
   * Backport nv_get_kern_phys_address() changes from 555.42.02 to fix kernel
     module build with gcc-14 on arm*.
 
- -- Andreas Beckmann <anbe@debian.org>  Sat, 12 Oct 2024 08:54:46 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 28 Jan 2025 22:16:33 +0100
 
 nvidia-graphics-drivers-tesla-418 (418.226.00-16) unstable; urgency=medium
 
@@ -1023,6 +1027,21 @@ nvidia-graphics-drivers (396.18-1) experimental; urgency=medium
   * Upload to experimental.
 
  -- Andreas Beckmann <anbe@debian.org>  Sun, 22 Apr 2018 13:59:45 +0200
+
+nvidia-graphics-drivers (390.157-11) UNRELEASED; urgency=medium
+
+  * Do not test building modules for the removed i386 kernels.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 25 Jan 2025 21:43:00 +0100
+
+nvidia-graphics-drivers (390.157-10) UNRELEASED; urgency=medium
+
+  * Backport drm_output_poll_changed changes from 535.216.01 to fix kernel
+    module build for Linux 6.12.
+  * Backport warning fixes from 396.18, 415.13, 418.30, 430.09, 435.17,
+    510.39.01, 535.146.02, 535.216.01 and 560.28.03.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 21 Dec 2024 22:50:00 +0100
 
 nvidia-graphics-drivers (390.157-9) UNRELEASED; urgency=medium
 
@@ -3869,6 +3888,9 @@ nvidia-graphics-drivers (343.22-1) experimental; urgency=medium
  -- Andreas Beckmann <anbe@debian.org>  Mon, 20 Oct 2014 19:04:58 +0200
 
 nvidia-graphics-drivers (340.108-2) UNRELEASED; urgency=medium
+
+  * Fix warnings during module build.
+  * Do not test building modules for the removed i386 kernels.
 
   * Backport nv_get_kern_phys_address() changes from 555.42.02 to fix kernel
     module build with gcc-14 on arm*.
