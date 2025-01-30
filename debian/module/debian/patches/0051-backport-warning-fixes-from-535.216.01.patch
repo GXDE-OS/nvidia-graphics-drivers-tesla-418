@@ -6,10 +6,10 @@ Subject: [PATCH] backport warning fixes from 535.216.01
 ---
  common/inc/nv-linux.h                 | 10 ++++++++++
  nvidia-modeset/nvidia-modeset-linux.c |  4 ++--
+ nvidia/nv-kthread-q-selftest.c        |  2 +-
  nvidia/linux_nvswitch.c               |  3 ++-
  nvidia/nv-dma.c                       |  2 +-
  nvidia/nv-ibmnpu.c                    |  2 +-
- nvidia/nv-kthread-q-selftest.c        |  2 +-
  nvidia/nv-mmap.c                      |  4 ++--
  nvidia/nv-procfs.c                    |  2 +-
  nvidia/nvlink_linux.c                 |  1 +
@@ -82,15 +82,27 @@ index 855e791e..a6e6768f 100644
                                           struct NvKmsKapiDevice *device,
                                           int *status)
  {
-@@ -856,7 +856,7 @@ void NVKMS_API_CALL nvkms_close_common(struct nvkms_per_open *popen)
+@@ -856,6 +856,7 @@ void NVKMS_API_CALL nvkms_close_common(struct nvkms_per_open *popen)
      nvkms_free(popen, sizeof(*popen));
  }
  
--int NVKMS_API_CALL nvkms_ioctl_common
-+static int NVKMS_API_CALL nvkms_ioctl_common
++static
+ int NVKMS_API_CALL nvkms_ioctl_common
  (
      struct nvkms_per_open *popen,
-     NvU32 cmd, NvU64 address, const size_t size
+diff --git a/nvidia/nv-kthread-q-selftest.c b/nvidia/nv-kthread-q-selftest.c
+index a8db326c..61f01fbc 100644
+--- a/nvidia/nv-kthread-q-selftest.c
++++ b/nvidia/nv-kthread-q-selftest.c
+@@ -71,7 +71,7 @@
+ #define NUM_Q_ITEMS_IN_MULTITHREAD_TEST (NUM_TEST_Q_ITEMS * NUM_TEST_KTHREADS)
+ 
+ // This exists in order to have a function to place a breakpoint on:
+-void on_nvq_assert(void)
++static void on_nvq_assert(void)
+ {
+     (void)NULL;
+ }
 diff --git a/nvidia/linux_nvswitch.c b/nvidia/linux_nvswitch.c
 index 70897470..01970149 100644
 --- a/nvidia/linux_nvswitch.c
@@ -140,19 +152,6 @@ index 3d3a8ce0..b5c62cd7 100644
  #include "nv-rsync.h"
  
  #include "nvlink_common.h"
-diff --git a/nvidia/nv-kthread-q-selftest.c b/nvidia/nv-kthread-q-selftest.c
-index a8db326c..61f01fbc 100644
---- a/nvidia/nv-kthread-q-selftest.c
-+++ b/nvidia/nv-kthread-q-selftest.c
-@@ -71,7 +71,7 @@
- #define NUM_Q_ITEMS_IN_MULTITHREAD_TEST (NUM_TEST_Q_ITEMS * NUM_TEST_KTHREADS)
- 
- // This exists in order to have a function to place a breakpoint on:
--void on_nvq_assert(void)
-+static void on_nvq_assert(void)
- {
-     (void)NULL;
- }
 diff --git a/nvidia/nv-mmap.c b/nvidia/nv-mmap.c
 index af53116d..8c9133b2 100644
 --- a/nvidia/nv-mmap.c
