@@ -1,18 +1,18 @@
-From 44602cd193f58f7279e39a6fbd02bf98e0a25cd8 Mon Sep 17 00:00:00 2001
+From 454a2bc8fc4416f16d956120ee5e54b3770dd5c9 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Sun, 8 Dec 2024 03:20:30 +0100
 Subject: [PATCH] backport warning fixes from 535.216.01
 
 ---
  common/inc/nv-linux.h                 | 12 ++++++++++++
- nvidia-modeset/nvidia-modeset-linux.c |  4 ++--
+ nvidia-modeset/nvidia-modeset-linux.c |  3 ++-
+ nvidia/nv-kthread-q-selftest.c        |  2 +-
  nvidia/nv-dma.c                       |  2 +-
  nvidia/nv-ibmnpu.c                    |  2 +-
- nvidia/nv-kthread-q-selftest.c        |  2 +-
  nvidia/nv-mmap.c                      |  4 ++--
  nvidia/nv-procfs.c                    |  2 +-
  nvidia/nvlink_linux.c                 |  1 +
- 8 files changed, 21 insertions(+), 8 deletions(-)
+ 8 files changed, 21 insertions(+), 7 deletions(-)
 
 diff --git a/common/inc/nv-linux.h b/common/inc/nv-linux.h
 index 2bb311c8..6c6b9eda 100644
@@ -79,7 +79,7 @@ index 2bb311c8..6c6b9eda 100644
  }
  
 diff --git a/nvidia-modeset/nvidia-modeset-linux.c b/nvidia-modeset/nvidia-modeset-linux.c
-index 5af3b827..35093b5d 100644
+index 5af3b827..a5ce0659 100644
 --- a/nvidia-modeset/nvidia-modeset-linux.c
 +++ b/nvidia-modeset/nvidia-modeset-linux.c
 @@ -766,7 +766,7 @@ static void nvkms_kapi_event_kthread_q_callback(void *arg)
@@ -91,15 +91,27 @@ index 5af3b827..35093b5d 100644
                                           struct NvKmsKapiDevice *device,
                                           int *status)
  {
-@@ -856,7 +856,7 @@ void NVKMS_API_CALL nvkms_close_common(struct nvkms_per_open *popen)
+@@ -856,6 +856,7 @@ void NVKMS_API_CALL nvkms_close_common(struct nvkms_per_open *popen)
      nvkms_free(popen, sizeof(*popen));
  }
  
--int NVKMS_API_CALL nvkms_ioctl_common
-+static int NVKMS_API_CALL nvkms_ioctl_common
++static
+ int NVKMS_API_CALL nvkms_ioctl_common
  (
      struct nvkms_per_open *popen,
-     NvU32 cmd, NvU64 address, const size_t size
+diff --git a/nvidia/nv-kthread-q-selftest.c b/nvidia/nv-kthread-q-selftest.c
+index a8db326c..61f01fbc 100644
+--- a/nvidia/nv-kthread-q-selftest.c
++++ b/nvidia/nv-kthread-q-selftest.c
+@@ -71,7 +71,7 @@
+ #define NUM_Q_ITEMS_IN_MULTITHREAD_TEST (NUM_TEST_Q_ITEMS * NUM_TEST_KTHREADS)
+ 
+ // This exists in order to have a function to place a breakpoint on:
+-void on_nvq_assert(void)
++static void on_nvq_assert(void)
+ {
+     (void)NULL;
+ }
 diff --git a/nvidia/nv-dma.c b/nvidia/nv-dma.c
 index a06c12c0..343e878d 100644
 --- a/nvidia/nv-dma.c
@@ -128,19 +140,6 @@ index 50503e1c..b53b5c12 100644
  
  #include "nvlink_common.h"
  #include "nvlink_errors.h"
-diff --git a/nvidia/nv-kthread-q-selftest.c b/nvidia/nv-kthread-q-selftest.c
-index a8db326c..61f01fbc 100644
---- a/nvidia/nv-kthread-q-selftest.c
-+++ b/nvidia/nv-kthread-q-selftest.c
-@@ -71,7 +71,7 @@
- #define NUM_Q_ITEMS_IN_MULTITHREAD_TEST (NUM_TEST_Q_ITEMS * NUM_TEST_KTHREADS)
- 
- // This exists in order to have a function to place a breakpoint on:
--void on_nvq_assert(void)
-+static void on_nvq_assert(void)
- {
-     (void)NULL;
- }
 diff --git a/nvidia/nv-mmap.c b/nvidia/nv-mmap.c
 index 3be5079a..e1b8b0ed 100644
 --- a/nvidia/nv-mmap.c
