@@ -70,6 +70,8 @@ nvidia-graphics-drivers (390.157-10) UNRELEASED; urgency=medium
 
   * Backport drm_output_poll_changed changes from 535.216.01 to fix kernel
     module build for Linux 6.12.
+  * Backport file_operations_fop_unsigned_offset_present changes from
+    535.230.02.
   * Backport warning fixes from 396.18, 415.13, 418.30, 430.09, 435.17,
     510.39.01, 535.146.02, 535.216.01 and 560.28.03.
 
