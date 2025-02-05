@@ -6,6 +6,8 @@ Subject: [PATCH] fix more warnings
 ---
  common/inc/nv-linux.h                 | 8 ++++++++
  nvidia-modeset/nvidia-modeset-linux.c | 1 +
+ nvidia/nv-frontend.c                  | 3 ---
+ nvidia/nv-frontend.h                  | 3 +++
  nvidia/nv-instance.c                  | 1 +
  nvidia/nv-mmap.c                      | 1 +
  nvidia/nv-vm.c                        | 2 +-
@@ -66,6 +68,32 @@ index a6e6768f..8fa7b2fa 100644
  void NVKMS_API_CALL nvkms_close_common(struct nvkms_per_open *popen)
  {
      /*
+diff --git a/nvidia/nv-frontend.c b/nvidia/nv-frontend.c
+index 59c69a06..dea97c4a 100644
+--- a/nvidia/nv-frontend.c
++++ b/nvidia/nv-frontend.c
+@@ -40,9 +40,6 @@ nvidia_module_t *nv_minor_num_table[NV_FRONTEND_CONTROL_DEVICE_MINOR_MAX + 1];
+ #if defined(CONFIG_PROC_FS)
+ static struct proc_dir_entry *nv_proc_topdir;
+ #endif
+-#else
+-int nvidia_init_module(void);
+-void nvidia_exit_module(void);
+ #endif
+ 
+ /* EXPORTS to Linux Kernel */
+diff --git a/nvidia/nv-frontend.h b/nvidia/nv-frontend.h
+index 38d81382..d125a131 100644
+--- a/nvidia/nv-frontend.h
++++ b/nvidia/nv-frontend.h
+@@ -31,4 +31,7 @@
+ int nvidia_frontend_add_device(nvidia_module_t *, nv_linux_state_t *);
+ int nvidia_frontend_remove_device(nvidia_module_t *, nv_linux_state_t *);
+ 
++int nvidia_init_module(void);
++void nvidia_exit_module(void);
++
+ #endif
 diff --git a/nvidia/nv-instance.c b/nvidia/nv-instance.c
 index 72fcdf63..e223340b 100644
 --- a/nvidia/nv-instance.c
