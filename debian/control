@@ -647,10 +647,10 @@ Depends:
  nvidia-vulkan-common,
  libvulkan1 (>= 1.0.42),
  libglx-${nvidia-}0 (= ${binary:Version}),
+ lib${nvidia}-rtcore (= ${binary:Version}) [!i386 !ppc64el],
  ${misc:Depends}
 Recommends:
  lib${nvidia}-cbl (= ${binary:Version}) [!i386 !ppc64el],
- lib${nvidia}-rtcore (= ${binary:Version}) [!i386 !ppc64el],
 Suggests:
  vulkan-tools,
 Enhances:
@@ -700,10 +700,10 @@ Depends:
  nvidia-nonglvnd-vulkan-common,
  libvulkan1 (>= 1.0.42),
  libgl1-${nvidia}-glx (= ${binary:Version}),
+ lib${nvidia}-rtcore (= ${binary:Version}) [!i386 !ppc64el],
  ${misc:Depends}
 Recommends:
  lib${nvidia}-cbl (= ${binary:Version}) [!i386 !ppc64el],
- lib${nvidia}-rtcore (= ${binary:Version}) [!i386 !ppc64el],
  nvidia-legacy-390xx-driver-libs-nonglvnd [i386],
 Suggests:
  vulkan-tools,
