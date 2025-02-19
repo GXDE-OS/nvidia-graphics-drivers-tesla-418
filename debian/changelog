@@ -135,6 +135,8 @@ nvidia-graphics-drivers (340.108-1~git4deb8jessie) UNRELEASED; urgency=medium
 
 nvidia-graphics-drivers (340.108-2) UNRELEASED; urgency=medium
 
+  * Backport cmd_symlink changes from 550.142 to fix kernel module build for
+    Linux 6.13.
   * Fix warnings during module build.
   * Do not test building modules for the removed i386 kernels.
 
