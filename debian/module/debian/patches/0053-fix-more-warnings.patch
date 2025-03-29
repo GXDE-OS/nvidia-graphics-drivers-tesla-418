@@ -1,4 +1,4 @@
-From 85cd3e34715e2fc7bb13ccc1cc48ed670853c43c Mon Sep 17 00:00:00 2001
+From c201fe1cba5ed9694e5961ccb03916444917d199 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Sun, 8 Dec 2024 22:13:22 +0100
 Subject: [PATCH] fix more warnings
@@ -6,10 +6,12 @@ Subject: [PATCH] fix more warnings
 ---
  common/inc/nv-linux.h                 | 8 ++++++++
  nvidia-modeset/nvidia-modeset-linux.c | 1 +
+ nvidia/nv-frontend.c                  | 3 ---
+ nvidia/nv-frontend.h                  | 3 +++
  nvidia/nv-instance.c                  | 1 +
  nvidia/nv-mmap.c                      | 1 +
  nvidia/nv-vm.c                        | 2 +-
- 5 files changed, 12 insertions(+), 1 deletion(-)
+ 7 files changed, 15 insertions(+), 4 deletions(-)
 
 diff --git a/common/inc/nv-linux.h b/common/inc/nv-linux.h
 index 03c56545..150440ac 100644
@@ -55,7 +57,7 @@ index 03c56545..150440ac 100644
  
  #define NV_KFREE(ptr, size) \
 diff --git a/nvidia-modeset/nvidia-modeset-linux.c b/nvidia-modeset/nvidia-modeset-linux.c
-index a6e6768f..8fa7b2fa 100644
+index 041baa91..4a5c1d6a 100644
 --- a/nvidia-modeset/nvidia-modeset-linux.c
 +++ b/nvidia-modeset/nvidia-modeset-linux.c
 @@ -818,6 +818,7 @@ failed:
@@ -66,6 +68,32 @@ index a6e6768f..8fa7b2fa 100644
  void NVKMS_API_CALL nvkms_close_common(struct nvkms_per_open *popen)
  {
      /*
+diff --git a/nvidia/nv-frontend.c b/nvidia/nv-frontend.c
+index 59c69a06..dea97c4a 100644
+--- a/nvidia/nv-frontend.c
++++ b/nvidia/nv-frontend.c
+@@ -40,9 +40,6 @@ nvidia_module_t *nv_minor_num_table[NV_FRONTEND_CONTROL_DEVICE_MINOR_MAX + 1];
+ #if defined(CONFIG_PROC_FS)
+ static struct proc_dir_entry *nv_proc_topdir;
+ #endif
+-#else
+-int nvidia_init_module(void);
+-void nvidia_exit_module(void);
+ #endif
+ 
+ /* EXPORTS to Linux Kernel */
+diff --git a/nvidia/nv-frontend.h b/nvidia/nv-frontend.h
+index 38d81382..d125a131 100644
+--- a/nvidia/nv-frontend.h
++++ b/nvidia/nv-frontend.h
+@@ -31,4 +31,7 @@
+ int nvidia_frontend_add_device(nvidia_module_t *, nv_linux_state_t *);
+ int nvidia_frontend_remove_device(nvidia_module_t *, nv_linux_state_t *);
+ 
++int nvidia_init_module(void);
++void nvidia_exit_module(void);
++
+ #endif
 diff --git a/nvidia/nv-instance.c b/nvidia/nv-instance.c
 index 72fcdf63..e223340b 100644
 --- a/nvidia/nv-instance.c
