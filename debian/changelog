@@ -135,6 +135,9 @@ nvidia-graphics-drivers (340.108-1~git4deb8jessie) UNRELEASED; urgency=medium
 
 nvidia-graphics-drivers (340.108-2) UNRELEASED; urgency=medium
 
+  * Backport ccflags-y changes from 570.153.02
+    to partially fix kernel module build for Linux 6.15.
+
   * Backport drm_driver_has_date changes from 570.124.04 to fix kernel module
     build for Linux 6.14.
 
