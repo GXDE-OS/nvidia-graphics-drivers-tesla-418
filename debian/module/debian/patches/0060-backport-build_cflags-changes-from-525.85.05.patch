@@ -1,4 +1,4 @@
-From b7d412bbb8f8f02e38a98e3955636b4881888fc5 Mon Sep 17 00:00:00 2001
+From 8d96eb5b09eae044877ee211094f8c0450a93c1f Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Wed, 28 May 2025 19:49:43 +0200
 Subject: [PATCH] backport build_cflags changes from 525.85.05
@@ -8,10 +8,10 @@ Subject: [PATCH] backport build_cflags changes from 525.85.05
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/conftest.sh b/conftest.sh
-index 3d54f14d..691f83cb 100755
+index f115216d..73675d9c 100755
 --- a/conftest.sh
 +++ b/conftest.sh
-@@ -154,7 +154,8 @@ test_headers() {
+@@ -156,7 +156,8 @@ test_headers() {
  build_cflags() {
      BASE_CFLAGS="-O2 -D__KERNEL__ \
  -DKBUILD_BASENAME=\"#conftest$$\" -DKBUILD_MODNAME=\"#conftest$$\" \

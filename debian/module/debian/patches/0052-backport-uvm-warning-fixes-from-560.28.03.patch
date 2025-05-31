@@ -1,4 +1,4 @@
-From d58591286ac050a8b2641b016d08d193ce68eff7 Mon Sep 17 00:00:00 2001
+From 049171149f6c6fc8c6edf32cdcad29a44d496050 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Sun, 8 Dec 2024 22:54:59 +0100
 Subject: [PATCH] backport uvm warning fixes from 560.28.03
@@ -34,12 +34,12 @@ index 98b5a2f3..06462836 100644
  #include "uvm8_pascal_fault_buffer.h"
  #include "hwref/pascal/gp100/dev_fault.h"
 diff --git a/nvidia-uvm/uvm8_tools.c b/nvidia-uvm/uvm8_tools.c
-index c5ba6747..c704e93c 100644
+index d4c9eb9d..c091d8b7 100644
 --- a/nvidia-uvm/uvm8_tools.c
 +++ b/nvidia-uvm/uvm8_tools.c
-@@ -23,6 +23,7 @@
- #include "uvm_common.h"
+@@ -24,6 +24,7 @@
  #include "uvm8_gpu.h"
+ #include "uvm8_hal.h"
  #include "uvm8_tools.h"
 +#include "uvm8_tools_init.h"
  #include "uvm8_va_space.h"
