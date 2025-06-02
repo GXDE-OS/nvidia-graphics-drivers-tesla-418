@@ -7,11 +7,12 @@ Description: use KBUILD_CFLAGS and (KBUILD_)LDFLAGS
 
 --- a/Kbuild
 +++ b/Kbuild
-@@ -109,13 +109,28 @@ CC ?= cc
+@@ -109,13 +109,29 @@ CC ?= cc
  HOST_CC ?= $(CC)
  LD ?= ld
  
 +NV_REMOVE_KBUILD_CFLAGS = $(GCC_PLUGINS_CFLAGS)
++NV_REMOVE_KBUILD_CFLAGS += -Werror-implicit-function-declaration
 +
 +NV_CFLAGS_FROM_KBUILD = \
 +	$(filter-out $(NV_REMOVE_KBUILD_CFLAGS),\
