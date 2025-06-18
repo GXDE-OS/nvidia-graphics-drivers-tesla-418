@@ -6,7 +6,7 @@ nvidia-graphics-drivers (390.157-13) UNRELEASED; urgency=medium
     GPL-only symbol __vma_start_write to fix kernel module build for
     Linux 6.15.  (Closes: #1107817)
 
- -- Andreas Beckmann <anbe@debian.org>  Wed, 18 Jun 2025 10:49:33 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 18 Jun 2025 11:18:35 +0200
 
 nvidia-graphics-drivers (390.157-12) UNRELEASED; urgency=medium
 
