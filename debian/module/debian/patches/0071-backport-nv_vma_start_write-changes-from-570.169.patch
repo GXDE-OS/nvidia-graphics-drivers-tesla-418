@@ -1,4 +1,4 @@
-From 250aa4f6e53fba6baaa654cf78a13960254dfed3 Mon Sep 17 00:00:00 2001
+From 3ff379c53767f24254ac8723e9bd2cd944cb1e46 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Thu, 19 Jun 2025 10:20:07 +0200
 Subject: [PATCH] backport nv_vma_start_write changes from 570.169
@@ -54,22 +54,22 @@ index 543eb468..d67201f6 100644
  #else
  static inline void nv_vm_flags_set(struct vm_area_struct *vma, unsigned long flags)
 diff --git a/nvidia-drm/nvidia-drm.Kbuild b/nvidia-drm/nvidia-drm.Kbuild
-index 30ff37b9..9624cff1 100644
+index 3647a554..9dcb205b 100644
 --- a/nvidia-drm/nvidia-drm.Kbuild
 +++ b/nvidia-drm/nvidia-drm.Kbuild
-@@ -52,6 +52,7 @@ NV_CONFTEST_GENERIC_COMPILE_TESTS += drm_atomic_available
- NV_CONFTEST_GENERIC_COMPILE_TESTS += is_export_symbol_gpl_refcount_inc
+@@ -53,6 +53,7 @@ NV_CONFTEST_GENERIC_COMPILE_TESTS += is_export_symbol_gpl_refcount_inc
  NV_CONFTEST_GENERIC_COMPILE_TESTS += is_export_symbol_gpl_refcount_dec_and_test
+ NV_CONFTEST_GENERIC_COMPILE_TESTS += is_export_symbol_present_drm_gem_prime_fd_to_handle
  NV_CONFTEST_GENERIC_COMPILE_TESTS += is_export_symbol_present_drm_gem_prime_handle_to_fd
 +NV_CONFTEST_GENERIC_COMPILE_TESTS += is_export_symbol_gpl___vma_start_write
  
  NV_CONFTEST_FUNCTION_COMPILE_TESTS += drm_dev_unref
  NV_CONFTEST_FUNCTION_COMPILE_TESTS += drm_reinit_primary_mode_group
 diff --git a/nvidia/nv-mmap.c b/nvidia/nv-mmap.c
-index a5f08940..39d9cb97 100644
+index 133c45fc..aa300396 100644
 --- a/nvidia/nv-mmap.c
 +++ b/nvidia/nv-mmap.c
-@@ -580,3 +580,75 @@ int nvidia_mmap(
+@@ -597,3 +597,75 @@ int nvidia_mmap(
  
      return status;
  }
@@ -146,10 +146,10 @@ index a5f08940..39d9cb97 100644
 +EXPORT_SYMBOL(nv_vma_start_write);
 +#endif // !NV_CAN_CALL_VMA_START_WRITE
 diff --git a/nvidia/nvidia.Kbuild b/nvidia/nvidia.Kbuild
-index 41a7ca4e..aa405d41 100644
+index fcfec37f..0062b493 100644
 --- a/nvidia/nvidia.Kbuild
 +++ b/nvidia/nvidia.Kbuild
-@@ -170,6 +170,7 @@ NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_present_swiotlb_map_sg_attr
+@@ -174,6 +174,7 @@ NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_present_swiotlb_map_sg_attr
  NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_present_swiotlb_dma_ops
  NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_gpl_screen_info
  NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_present_timer_delete_sync
