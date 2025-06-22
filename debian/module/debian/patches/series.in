@@ -39,6 +39,7 @@ bashisms.patch
 0036-backport-pfn_valid-changes-in-nv-mmap.c-from-470.239.patch
 0037-import-pfn_valid-w-o-GPL-rcu_read_lock-unlock-from-v.patch
 0038-backport-drm_unlocked_ioctl_flag_present-changes-fro.patch
+0040-backport-screen_info-changes-from-470.239.06.patch
 0041-backport-CONFIG_MITIGATION_RETPOLINE-changes-from-47.patch
 0043-backport-follow_pfn-changes-from-550.90.07.patch
 0045-let-the-virt_addr_valid-macro-use-nv_pfn_valid-on-pp.patch
@@ -63,7 +64,7 @@ bashisms.patch
 0065-backport-ccflags-y-changes-from-570.153.02.patch
 0066-backport-nv_timer_delete_sync-changes-from-570.153.0.patch
 0067-backport-drm_connector_helper_funcs_mode_valid_has_c.patch
-0071-Tentative-fix-for-using-GPL-only-__vma_start_write-o.patch
+0071-backport-nv_vma_start_write-changes-from-570.169.patch
 
 # build system updates
 conftest-verbose.patch

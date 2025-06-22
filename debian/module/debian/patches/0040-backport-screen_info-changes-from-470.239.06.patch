@@ -1,0 +1,59 @@
+From 76cbec23f5f28cda7d3b9d31561b5faa34d370e4 Mon Sep 17 00:00:00 2001
+From: Andreas Beckmann <anbe@debian.org>
+Date: Mon, 4 Mar 2024 22:48:44 +0100
+Subject: [PATCH] backport screen_info changes from 470.239.06
+
+---
+ common/inc/nv-linux.h | 2 ++
+ conftest.sh           | 4 ++--
+ nvidia/nvidia.Kbuild  | 1 +
+ 3 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/common/inc/nv-linux.h b/common/inc/nv-linux.h
+index fd6bc9c6..bbd4400d 100644
+--- a/common/inc/nv-linux.h
++++ b/common/inc/nv-linux.h
+@@ -2083,4 +2083,6 @@ static inline int nv_pfn_valid(unsigned long pfn)
+ #  define nv_pfn_valid pfn_valid
+ #endif
+ 
++#define NV_CHECK_EXPORT_SYMBOL(symbol)  (NV_IS_EXPORT_SYMBOL_PRESENT_##symbol && \
++                                         !NV_IS_EXPORT_SYMBOL_GPL_##symbol)
+ #endif  /* _NV_LINUX_H_ */
+diff --git a/conftest.sh b/conftest.sh
+index 766b4de8..a3e4d95d 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -368,7 +368,7 @@ export_symbol_present_conftest() {
+     SYMBOL="$1"
+     TAB='	'
+ 
+-    if grep -e "${TAB}${SYMBOL}${TAB}.*${TAB}EXPORT_SYMBOL.*\$" \
++    if grep -e "${TAB}${SYMBOL}${TAB}.*${TAB}EXPORT_SYMBOL\(_GPL\)\?\s*\$" \
+                "$OUTPUT/Module.symvers" >/dev/null 2>&1; then
+         echo "#define NV_IS_EXPORT_SYMBOL_PRESENT_$SYMBOL 1" |
+             append_conftest "symbols"
+@@ -389,7 +389,7 @@ export_symbol_gpl_conftest() {
+     SYMBOL="$1"
+     TAB='	'
+ 
+-    if grep -e "${TAB}${SYMBOL}${TAB}.*${TAB}EXPORT_\(UNUSED_\)*SYMBOL_GPL\$" \
++    if grep -e "${TAB}${SYMBOL}${TAB}.*${TAB}EXPORT_\(UNUSED_\)*SYMBOL_GPL\s*\$" \
+                "$OUTPUT/Module.symvers" >/dev/null 2>&1; then
+         echo "#define NV_IS_EXPORT_SYMBOL_GPL_$SYMBOL 1" |
+             append_conftest "symbols"
+diff --git a/nvidia/nvidia.Kbuild b/nvidia/nvidia.Kbuild
+index 7e811ff4..83dc2e33 100644
+--- a/nvidia/nvidia.Kbuild
++++ b/nvidia/nvidia.Kbuild
+@@ -175,6 +175,7 @@ NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_gpl_of_node_to_nid
+ NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_gpl_sme_active
+ NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_present_swiotlb_map_sg_attrs
+ NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_present_swiotlb_dma_ops
++NV_CONFTEST_SYMBOL_COMPILE_TESTS += is_export_symbol_gpl_screen_info
+ 
+ NV_CONFTEST_TYPE_COMPILE_TESTS += i2c_adapter
+ NV_CONFTEST_TYPE_COMPILE_TESTS += pm_message_t
+-- 
+2.39.5
+

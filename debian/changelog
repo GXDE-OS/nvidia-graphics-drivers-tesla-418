@@ -1,3 +1,9 @@
+nvidia-graphics-drivers-tesla-418 (418.226.00-20) UNRELEASED; urgency=medium
+
+  * Backport nv_vma_start_write changes from 570.169.
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 20 Jun 2025 00:52:30 +0200
+
 nvidia-graphics-drivers-tesla-418 (418.226.00-19) unstable; urgency=medium
 
   * Backport ccflags-y and nv_timer_delete_sync changes from 570.153.02 and
@@ -1050,6 +1056,12 @@ nvidia-graphics-drivers (396.18-1) experimental; urgency=medium
   * Upload to experimental.
 
  -- Andreas Beckmann <anbe@debian.org>  Sun, 22 Apr 2018 13:59:45 +0200
+
+nvidia-graphics-drivers (390.157-14) UNRELEASED; urgency=medium
+
+  * Backport nv_vma_start_write changes from 570.169.
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 20 Jun 2025 00:25:32 +0200
 
 nvidia-graphics-drivers (390.157-13) UNRELEASED; urgency=medium
 
@@ -4006,8 +4018,8 @@ nvidia-graphics-drivers (343.22-1) experimental; urgency=medium
 nvidia-graphics-drivers (340.108-2) UNRELEASED; urgency=medium
 
   * Backport ccflags-y and nv_timer_delete_sync changes from 570.153.02 and
-    import tentative fix from CachyOS for avoiding calls to GPL-only symbol
-    __vma_start_write to fix kernel module build for Linux 6.15.
+    nv_vma_start_write changes from 570.169 to fix kernel module build for
+    Linux 6.15.
 
   * Backport drm_driver_has_date changes from 570.124.04 to fix kernel module
     build for Linux 6.14.
