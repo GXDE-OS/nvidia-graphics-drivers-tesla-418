@@ -1,6 +1,10 @@
 nvidia-graphics-drivers (390.157-14) UNRELEASED; urgency=medium
 
+  [ Andreas Beckmann ]
   * Backport nv_vma_start_write changes from 570.169.
+
+  [ Luca Boccassi ]
+  * Remove myself from Uploaders.
 
  -- Andreas Beckmann <anbe@debian.org>  Fri, 20 Jun 2025 00:25:32 +0200
 
