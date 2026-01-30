@@ -62,6 +62,7 @@ buildfix_kernel_5.2.patch
 0066-backport-nv_timer_delete_sync-changes-from-570.153.0.patch
 0071-backport-nv_vma_start_write-changes-from-570.169.patch
 0072-disable-objtool-usage.patch
+0075-backport-drm_print.h-changes-from-570.211.01.patch
 
 # build system updates
 separate-makefile-kbuild.patch
