@@ -1,24 +1,25 @@
-From 04c222c33afa638366967d029f2961ef1bb1d460 Mon Sep 17 00:00:00 2001
+From 07e0c1c615396c2548fb640b69115c9be7a75cef Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Thu, 29 Jan 2026 15:32:27 +0100
 Subject: [PATCH] backport vm_area_struct_has_const_vm_flags changes from
  525.105.17
 
 ---
- common/inc/nv-mm.h   | 22 ++++++++++++++++++++++
+ common/inc/nv-mm.h   | 23 +++++++++++++++++++++++
  conftest.sh          | 19 +++++++++++++++++++
  nvidia/nv-mmap.c     | 10 +++++-----
  nvidia/nvidia.Kbuild |  1 +
- 4 files changed, 47 insertions(+), 5 deletions(-)
+ 4 files changed, 48 insertions(+), 5 deletions(-)
 
 diff --git a/common/inc/nv-mm.h b/common/inc/nv-mm.h
-index aec55b0..1f1e8c1 100644
+index aec55b0b..4c277bdb 100644
 --- a/common/inc/nv-mm.h
 +++ b/common/inc/nv-mm.h
-@@ -282,4 +282,26 @@ static inline struct rw_semaphore *nv_mmap_get_lock(struct mm_struct *mm)
+@@ -282,4 +282,27 @@ static inline struct rw_semaphore *nv_mmap_get_lock(struct mm_struct *mm)
  #endif
  }
  
++#include <linux/version.h>
 +#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 0, 0)
 +typedef unsigned long vm_flags_t;
 +#endif
@@ -43,7 +44,7 @@ index aec55b0..1f1e8c1 100644
 +
  #endif // __NV_MM_H__
 diff --git a/conftest.sh b/conftest.sh
-index 921490a..054937a 100755
+index 921490a2..054937a2 100755
 --- a/conftest.sh
 +++ b/conftest.sh
 @@ -4677,6 +4677,25 @@ compile_test() {
@@ -73,7 +74,7 @@ index 921490a..054937a 100755
          # specifying the relevant upstream Linux kernel commit.
          #
 diff --git a/nvidia/nv-mmap.c b/nvidia/nv-mmap.c
-index 0b0a6f2..3be5079 100644
+index 0b0a6f22..3be5079a 100644
 --- a/nvidia/nv-mmap.c
 +++ b/nvidia/nv-mmap.c
 @@ -471,7 +471,7 @@ int nvidia_mmap_helper(
@@ -106,7 +107,7 @@ index 0b0a6f2..3be5079 100644
  
      vma->vm_ops = &nv_vm_ops;
 diff --git a/nvidia/nvidia.Kbuild b/nvidia/nvidia.Kbuild
-index 39d8152..468655f 100644
+index 39d8152f..468655f2 100644
 --- a/nvidia/nvidia.Kbuild
 +++ b/nvidia/nvidia.Kbuild
 @@ -209,6 +209,7 @@ NV_CONFTEST_TYPE_COMPILE_TESTS += sysfs_slab_unlink
@@ -118,5 +119,5 @@ index 39d8152..468655f 100644
  NV_CONFTEST_GENERIC_COMPILE_TESTS += dom0_kernel_present
  NV_CONFTEST_GENERIC_COMPILE_TESTS += nvidia_vgpu_kvm_build
 -- 
-2.20.1
+2.39.5
 

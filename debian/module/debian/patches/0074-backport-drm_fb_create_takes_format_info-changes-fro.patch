@@ -1,4 +1,4 @@
-From e0cea78179f4c2db36698b8e2dbb1ba87399b9da Mon Sep 17 00:00:00 2001
+From 0969d3c8bf0dfec36f3cfa63bcc8bfc5510076c9 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Sun, 2 Nov 2025 08:18:20 +0100
 Subject: [PATCH] backport drm_fb_create_takes_format_info changes from
@@ -13,10 +13,10 @@ Subject: [PATCH] backport drm_fb_create_takes_format_info changes from
  5 files changed, 35 insertions(+)
 
 diff --git a/conftest.sh b/conftest.sh
-index 2c8d76e2..34d65553 100755
+index b410751c..9def63dd 100755
 --- a/conftest.sh
 +++ b/conftest.sh
-@@ -3917,6 +3917,25 @@ compile_test() {
+@@ -3932,6 +3932,25 @@ compile_test() {
              compile_check_conftest "$CODE" "NV_KMEM_CACHE_CREATE_USERCOPY_PRESENT" "" "functions"
          ;;
  

@@ -1,39 +1,39 @@
-From e746e9bf9db46f06d5f48819a77c2c642bb27c67 Mon Sep 17 00:00:00 2001
+From 863e318245a5ca986a5f775df3f99f360fb2abf2 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Tue, 27 Jan 2026 17:41:05 +0100
 Subject: [PATCH] backport drm_print.h changes from 570.211.01
 
 ---
- conftest.sh | 1 +
- nv-drm.c    | 4 ++++
+ conftest.sh                  | 1 +
+ nvidia-drm/nvidia-drm-priv.h | 4 ++++
  2 files changed, 5 insertions(+)
 
 diff --git a/conftest.sh b/conftest.sh
-index 6154c24c..3e359786 100755
+index 9def63dd..9bd240f5 100755
 --- a/conftest.sh
 +++ b/conftest.sh
-@@ -149,6 +149,7 @@ test_headers() {
-     #
-     FILES="asm/system.h"
+@@ -98,6 +98,7 @@ test_headers() {
+     FILES="acpi/video.h"
+     FILES="$FILES asm/system.h"
      FILES="$FILES drm/drmP.h"
 +    FILES="$FILES drm/drm_print.h"
+     FILES="$FILES drm/drm_auth.h"
      FILES="$FILES drm/drm_gem.h"
-     FILES="$FILES drm/drm_drv.h"
-     FILES="$FILES drm/drm_prime.h"
-diff --git a/nv-drm.c b/nv-drm.c
-index f6fb4583..5f93a277 100644
---- a/nv-drm.c
-+++ b/nv-drm.c
-@@ -98,6 +98,10 @@
- #include <linux/file.h>
+     FILES="$FILES drm/drm_crtc.h"
+diff --git a/nvidia-drm/nvidia-drm-priv.h b/nvidia-drm/nvidia-drm-priv.h
+index 4f1a0e7a..7b0e9f6b 100644
+--- a/nvidia-drm/nvidia-drm-priv.h
++++ b/nvidia-drm/nvidia-drm-priv.h
+@@ -31,6 +31,10 @@
+ #include <drm/drmP.h>
  #endif
  
 +#if defined(NV_DRM_DRM_PRINT_H_PRESENT)
 +#include <drm/drm_print.h>
 +#endif
 +
- #if defined(NV_DRM_DRM_DRV_H_PRESENT)
- #include <drm/drm_drv.h>
+ #if defined(NV_DRM_DRM_DEVICE_H_PRESENT)
+ #include <drm/drm_device.h>
  #endif
 -- 
 2.39.5
