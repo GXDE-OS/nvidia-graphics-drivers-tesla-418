@@ -42,8 +42,8 @@ index 9aa4b898..f8aa35ef 100755
 +        ;;
 +
          # When adding a new conftest entry, please use the correct format for
-         # specifying the relevant upstream Linux kernel commit.
-         #
+         # specifying the relevant upstream Linux kernel commit.  Please
+         # avoid specifying -rc kernels, and only use SHAs that actually exist
 diff --git a/nvidia-drm/nvidia-drm-drv.c b/nvidia-drm/nvidia-drm-drv.c
 index 0919c4d9..beb74a49 100644
 --- a/nvidia-drm/nvidia-drm-drv.c

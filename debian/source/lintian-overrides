@@ -18,3 +18,4 @@ upstream-metadata-missing-repository
 # this package targets buster
 package-uses-old-debhelper-compat-version 12
 redundant-rules-requires-root-no-field
+redundant-priority-optional-field
