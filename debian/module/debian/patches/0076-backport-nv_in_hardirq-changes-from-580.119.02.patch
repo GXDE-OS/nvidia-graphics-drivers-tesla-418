@@ -1,4 +1,4 @@
-From 5fa114138452cd27871c3bb5f1ffae9e47f0837b Mon Sep 17 00:00:00 2001
+From 2edf2c6a9d75f27fc897a2568cd8cd02f730a877 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Tue, 27 Jan 2026 18:09:15 +0100
 Subject: [PATCH] backport nv_in_hardirq changes from 580.119.02
@@ -10,10 +10,10 @@ Subject: [PATCH] backport nv_in_hardirq changes from 580.119.02
  3 files changed, 18 insertions(+), 4 deletions(-)
 
 diff --git a/common/inc/nv-time.h b/common/inc/nv-time.h
-index 23c22f4b..8da729c1 100644
+index b4fe2b79..8ebe4016 100644
 --- a/common/inc/nv-time.h
 +++ b/common/inc/nv-time.h
-@@ -36,6 +36,20 @@ typedef struct timeval nv_timeval;
+@@ -33,6 +33,20 @@ typedef struct timeval nv_timeval;
  typedef struct __kernel_old_timeval nv_timeval;
  #endif
  
@@ -35,10 +35,10 @@ index 23c22f4b..8da729c1 100644
  {
  #ifdef NV_DO_GETTIMEOFDAY_PRESENT
 diff --git a/nvidia/nvlink_linux.c b/nvidia/nvlink_linux.c
-index 343cb844..6765bd7a 100644
+index 95195d06..f58f36a5 100644
 --- a/nvidia/nvlink_linux.c
 +++ b/nvidia/nvlink_linux.c
-@@ -571,7 +571,7 @@ void NVLINK_API_CALL nvlink_sleep(unsigned int ms)
+@@ -556,7 +556,7 @@ void NVLINK_API_CALL nvlink_sleep(unsigned int ms)
  
      nv_gettimeofday(&tm_aux);
  
@@ -48,10 +48,10 @@ index 343cb844..6765bd7a 100644
          return;
      }
 diff --git a/nvidia/os-interface.c b/nvidia/os-interface.c
-index 262171f4..76afce55 100644
+index 67496af7..2f8a0735 100644
 --- a/nvidia/os-interface.c
 +++ b/nvidia/os-interface.c
-@@ -193,7 +193,7 @@ BOOL NV_API_CALL os_semaphore_may_sleep(void)
+@@ -194,7 +194,7 @@ BOOL NV_API_CALL os_semaphore_may_sleep(void)
  
  BOOL NV_API_CALL os_is_isr(void)
  {
@@ -60,16 +60,16 @@ index 262171f4..76afce55 100644
  }
  
  // return TRUE if the caller is the super-user
-@@ -510,7 +510,7 @@ NV_STATUS NV_API_CALL os_delay_us(NvU32 MicroSeconds)
+@@ -537,7 +537,7 @@ NV_STATUS NV_API_CALL os_delay_us(NvU32 MicroSeconds)
      nv_gettimeofday(&tm1);
  #endif
  
 -    if (in_irq() && (MicroSeconds > NV_MAX_ISR_DELAY_US))
 +    if (nv_in_hardirq() && (MicroSeconds > NV_MAX_ISR_DELAY_US))
          return NV_ERR_GENERIC;
-     
+ 
      mdelay_safe_msec = MicroSeconds / 1000;
-@@ -555,7 +555,7 @@ NV_STATUS NV_API_CALL os_delay(NvU32 MilliSeconds)
+@@ -582,7 +582,7 @@ NV_STATUS NV_API_CALL os_delay(NvU32 MilliSeconds)
      tm_start = tm_aux;
  #endif
  
@@ -77,7 +77,7 @@ index 262171f4..76afce55 100644
 +    if (nv_in_hardirq() && (MilliSeconds > NV_MAX_ISR_DELAY_MS))
          return NV_ERR_GENERIC;
  
-     if (!NV_MAY_SLEEP()) 
+     if (!NV_MAY_SLEEP())
 -- 
 2.39.5
 

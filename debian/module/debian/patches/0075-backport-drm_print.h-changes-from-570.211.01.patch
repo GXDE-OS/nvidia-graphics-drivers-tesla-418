@@ -1,4 +1,4 @@
-From 863e318245a5ca986a5f775df3f99f360fb2abf2 Mon Sep 17 00:00:00 2001
+From a870b7bd35c3e6a6906bc8ea674721a3447a2403 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Tue, 27 Jan 2026 17:41:05 +0100
 Subject: [PATCH] backport drm_print.h changes from 570.211.01
@@ -9,12 +9,12 @@ Subject: [PATCH] backport drm_print.h changes from 570.211.01
  2 files changed, 5 insertions(+)
 
 diff --git a/conftest.sh b/conftest.sh
-index 9def63dd..9bd240f5 100755
+index 4992e1b8..ec68ffe7 100755
 --- a/conftest.sh
 +++ b/conftest.sh
-@@ -98,6 +98,7 @@ test_headers() {
-     FILES="acpi/video.h"
-     FILES="$FILES asm/system.h"
+@@ -97,6 +97,7 @@ test_headers() {
+     #
+     FILES="asm/system.h"
      FILES="$FILES drm/drmP.h"
 +    FILES="$FILES drm/drm_print.h"
      FILES="$FILES drm/drm_auth.h"

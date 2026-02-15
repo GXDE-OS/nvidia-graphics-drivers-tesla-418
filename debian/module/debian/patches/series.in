@@ -72,7 +72,7 @@ bashisms.patch
 0075-backport-drm_print.h-changes-from-570.211.01.patch
 0076-backport-nv_in_hardirq-changes-from-580.119.02.patch
 0077-backport-vma_flags_set_word-changes-from-580.126.09.patch
-#HAS_UVM#0078-backport-vma_flags_set_word-changes-from-580.126.09-.patch
+0078-backport-vma_flags_set_word-changes-from-580.126.09-.patch
 0079-backport-dma_map_ops_has_map_phys-changes-from-580.1.patch
 0080-backport-for_each_-_plane_in_state-changes-from-580..patch
 0081-support-fallback-for-for_each_-_plane_in_state.patch

@@ -1,4 +1,4 @@
-From fc965fd6dcb6aab248084292618af6b4872cf250 Mon Sep 17 00:00:00 2001
+From a70b982d593ec4a4b3c8c7a00fb860b4e2843478 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Tue, 27 Jan 2026 20:25:31 +0100
 Subject: [PATCH] backport dma_map_ops_has_map_phys changes from 580.126.09
@@ -10,11 +10,11 @@ Subject: [PATCH] backport dma_map_ops_has_map_phys changes from 580.126.09
  3 files changed, 34 insertions(+)
 
 diff --git a/conftest.sh b/conftest.sh
-index b1c82259..ee7b128b 100755
+index 73d76f05..429d203f 100755
 --- a/conftest.sh
 +++ b/conftest.sh
-@@ -3933,6 +3933,35 @@ compile_test() {
-             compile_check_conftest "$CODE" "NV_KMEM_CACHE_CREATE_USERCOPY_PRESENT" "" "functions"
+@@ -3511,6 +3511,35 @@ compile_test() {
+             compile_check_conftest "$CODE" "NV_DMA_BUF_OWNER_PRESENT" "" "types"
          ;;
  
 +        dma_map_ops_has_map_phys)
@@ -50,7 +50,7 @@ index b1c82259..ee7b128b 100755
              #
              # Determine if a `struct drm_format_info *` is passed into
 diff --git a/nvidia/nv-dma.c b/nvidia/nv-dma.c
-index 343e878d..e7584dea 100644
+index 048b2608..0b8eff09 100644
 --- a/nvidia/nv-dma.c
 +++ b/nvidia/nv-dma.c
 @@ -619,7 +619,11 @@ static NvBool nv_dma_is_map_resource_implemented
@@ -66,13 +66,13 @@ index 343e878d..e7584dea 100644
      return NV_FALSE;
  #endif
 diff --git a/nvidia/nvidia.Kbuild b/nvidia/nvidia.Kbuild
-index 5e599969..5721092b 100644
+index 1cf0dcad..bf98dde0 100644
 --- a/nvidia/nvidia.Kbuild
 +++ b/nvidia/nvidia.Kbuild
-@@ -164,6 +164,7 @@ NV_CONFTEST_FUNCTION_COMPILE_TESTS += ioremap_nocache
- NV_CONFTEST_FUNCTION_COMPILE_TESTS += vga_tryget
+@@ -167,6 +167,7 @@ NV_CONFTEST_FUNCTION_COMPILE_TESTS += vga_tryget
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += iterate_fd
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += dma_set_coherent_mask
  NV_CONFTEST_FUNCTION_COMPILE_TESTS += acpi_bus_get_device
- NV_CONFTEST_FUNCTION_COMPILE_TESTS += acpi_video_backlight_use_native
 +NV_CONFTEST_FUNCTION_COMPILE_TESTS += dma_map_ops_has_map_phys
  NV_CONFTEST_FUNCTION_COMPILE_TESTS += vma_flags_set_word
  NV_CONFTEST_FUNCTION_COMPILE_TESTS += vm_flags_set

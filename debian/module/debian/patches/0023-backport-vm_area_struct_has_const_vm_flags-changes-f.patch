@@ -1,4 +1,4 @@
-From edf20b085063c61031247fe3476a68a629b10da6 Mon Sep 17 00:00:00 2001
+From 11d754a485869fee4ad87708351abb7315d1ac97 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Thu, 29 Jan 2026 15:32:27 +0100
 Subject: [PATCH] backport vm_area_struct_has_const_vm_flags changes from
@@ -9,10 +9,10 @@ Subject: [PATCH] backport vm_area_struct_has_const_vm_flags changes from
  conftest.sh          | 19 +++++++++++++++++++
  nvidia/nv-mmap.c     | 12 ++++++------
  nvidia/nvidia.Kbuild |  1 +
- 4 files changed, 48 insertions(+), 6 deletions(-)
+ 4 files changed, 49 insertions(+), 6 deletions(-)
 
 diff --git a/common/inc/nv-mm.h b/common/inc/nv-mm.h
-index 50a0760..70b3814 100644
+index 50a07605..72a45e87 100644
 --- a/common/inc/nv-mm.h
 +++ b/common/inc/nv-mm.h
 @@ -282,4 +282,27 @@ static inline struct rw_semaphore *nv_mmap_get_lock(struct mm_struct *mm)
@@ -44,7 +44,7 @@ index 50a0760..70b3814 100644
 +
  #endif // __NV_MM_H__
 diff --git a/conftest.sh b/conftest.sh
-index 4b9ee38..3476202 100755
+index 4b9ee387..3476202c 100755
 --- a/conftest.sh
 +++ b/conftest.sh
 @@ -4193,6 +4193,25 @@ compile_test() {
@@ -74,7 +74,7 @@ index 4b9ee38..3476202 100755
          # specifying the relevant upstream Linux kernel commit.
          #
 diff --git a/nvidia/nv-mmap.c b/nvidia/nv-mmap.c
-index 7711d88..29ac828 100644
+index 7711d88d..29ac8284 100644
 --- a/nvidia/nv-mmap.c
 +++ b/nvidia/nv-mmap.c
 @@ -357,7 +357,7 @@ static int nvidia_mmap_numa(
@@ -116,7 +116,7 @@ index 7711d88..29ac828 100644
  
      vma->vm_ops = &nv_vm_ops;
 diff --git a/nvidia/nvidia.Kbuild b/nvidia/nvidia.Kbuild
-index eac42be..7e811ff 100644
+index eac42be6..7e811ff4 100644
 --- a/nvidia/nvidia.Kbuild
 +++ b/nvidia/nvidia.Kbuild
 @@ -207,6 +207,7 @@ NV_CONFTEST_TYPE_COMPILE_TESTS += mm_has_mmap_lock

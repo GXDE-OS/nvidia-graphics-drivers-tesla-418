@@ -1,17 +1,34 @@
-From 8341328b51a9aa4740b3187d935f161f691b6eac Mon Sep 17 00:00:00 2001
+From 2ae08f6ed46358fea0389c5d7500ad18c83ae955 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Thu, 29 Jan 2026 13:30:59 +0100
 Subject: [PATCH] backport conftest.sh comment changes from 545.23.06
 
 ---
- conftest.sh | 182 +++++++++++++++++++++++++++-------------------------
- 1 file changed, 96 insertions(+), 86 deletions(-)
+ conftest.sh | 206 +++++++++++++++++++++++++++-------------------------
+ 1 file changed, 107 insertions(+), 99 deletions(-)
 
 diff --git a/conftest.sh b/conftest.sh
-index d2cb8475..e1247f6e 100755
+index 6090bf2e..75ca3ef6 100755
 --- a/conftest.sh
 +++ b/conftest.sh
-@@ -586,8 +586,8 @@ compile_test() {
+@@ -577,12 +577,10 @@ compile_test() {
+         set_pages_array_uc)
+             #
+             # Determine if the set_pages_array_uc() function is present.
+-            # It does not exist on all architectures. 
+-            # 
+-            # set_pages_array_uc() was added by commit 
+-            # 0f3507555f6fa4acbc85a646d6e8766230db38fc ("x86, CPA: Add 
+-            # set_pages_arrayuc and set_pages_array_wb") in v2.6.30-rc1 (Thu Mar
+-            # 19 14:51:15 2009)
++            # It does not exist on all architectures.
++            #
++            # Added by commit 0f3507555f6f ("x86, CPA: Add set_pages_arrayuc
++            # and set_pages_array_wb") in v2.6.30.
+             #
+             CODE="
+             #include <linux/types.h>
+@@ -641,8 +639,8 @@ compile_test() {
              #
              # Added by commit 3c299dc22635 ("PCI: add
              # pci_get_domain_bus_and_slot function") in 2.6.33 but aarch64
@@ -22,7 +39,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #include <linux/pci.h>
-@@ -1807,9 +1807,8 @@ compile_test() {
+@@ -1412,9 +1410,8 @@ compile_test() {
              #
              # Determine if the pde_data() function is present.
              #
@@ -34,8 +51,8 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #include <linux/proc_fs.h>
-@@ -2145,8 +2144,8 @@ compile_test() {
-             # Determine if the get_dma_ops() function is present.
+@@ -1714,8 +1711,8 @@ compile_test() {
+             # based implementation") in v4.5
              #
              # Commit 0a0f0d8be76d ("dma-mapping: split <linux/dma-mapping.h>")
 -            # in v5.10-rc1 (2020-09-22), moved get_dma_ops() function
@@ -45,8 +62,8 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_LINUX_DMA_MAP_OPS_H_PRESENT)
-@@ -2516,7 +2515,7 @@ compile_test() {
-             #   2013-12-11  b3f2333de8e81b089262b26d52272911523e605f
+@@ -2126,7 +2123,7 @@ compile_test() {
+             # attached drivers") in v3.14 (2013-12-11)
              #
              # The commit 57bb1ee60340 ("drm: Compile out legacy chunks from
 -            # struct drm_device") compiles out the legacy chunks like
@@ -54,7 +71,7 @@ index d2cb8475..e1247f6e 100755
              # drm_driver::legacy_dev_list.
              #
              CODE="
-@@ -2539,14 +2538,14 @@ compile_test() {
+@@ -2149,14 +2146,14 @@ compile_test() {
              #
              # Determine if jiffies_to_timespec() is present
              #
@@ -77,7 +94,7 @@ index d2cb8475..e1247f6e 100755
              compile_check_conftest "$CODE" "NV_JIFFIES_TO_TIMESPEC_PRESENT" "" "functions"
          ;;
  
-@@ -2556,14 +2555,21 @@ compile_test() {
+@@ -2166,14 +2163,21 @@ compile_test() {
              #   drm_universal_plane_init()
              #   drm_crtc_init_with_planes()
              #   drm_encoder_init()
@@ -106,7 +123,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_DRM_DRMP_H_PRESENT)
-@@ -2848,8 +2854,8 @@ compile_test() {
+@@ -2467,8 +2471,8 @@ compile_test() {
              #
              # Added by commit 210647af897a ("PCI: Rename pci_remove_bus_device
              # to pci_stop_and_remove_bus_device") in v3.4 (2012-02-25) but
@@ -117,7 +134,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #include <linux/types.h>
-@@ -3028,9 +3034,9 @@ compile_test() {
+@@ -2613,9 +2617,9 @@ compile_test() {
              # commit 768ae309a961 ("mm: replace get_user_pages() write/force
              # parameters with gup_flags") in v4.9 (2016-10-13)
              #
@@ -129,7 +146,7 @@ index d2cb8475..e1247f6e 100755
              #
              # linux-4.4.168 cherry-picked commit 768ae309a961 without
              # c12d2da56d0e which is covered in Conftest #3.
-@@ -3198,11 +3204,11 @@ compile_test() {
+@@ -2783,11 +2787,11 @@ compile_test() {
              #
              # get_user_pages_remote() removed 'tsk' parameter by
              # commit 64019a2e467a ("mm/gup: remove task_struct pointer for
@@ -144,7 +161,7 @@ index d2cb8475..e1247f6e 100755
              #
  
              #
-@@ -4180,8 +4186,8 @@ compile_test() {
+@@ -3786,8 +3790,8 @@ compile_test() {
              #
              # The DRIVER_PRIME flag was added by commit 3248877ea179 (drm:
              # base prime/dma-buf support (v5)) in v3.4 (2011-11-25) and is
@@ -155,7 +172,7 @@ index d2cb8475..e1247f6e 100755
              #
              # DRIVER_PRIME definition moved from drmP.h to drm_drv.h by
              # commit 85e634bce01a (drm: Extract drm_drv.h) in v4.10
-@@ -4237,10 +4243,10 @@ compile_test() {
+@@ -3820,10 +3824,10 @@ compile_test() {
              #
              # drm_connector_for_each_possible_encoder() is added by commit
              # 83aefbb887b5 (drm: Add drm_connector_for_each_possible_encoder())
@@ -170,7 +187,7 @@ index d2cb8475..e1247f6e 100755
              #
              echo "$CONFTEST_PREAMBLE
              #if defined(NV_DRM_DRMP_H_PRESENT)
-@@ -4296,8 +4302,8 @@ compile_test() {
+@@ -3879,8 +3883,8 @@ compile_test() {
              #
              # Determine if the 'struct proc_ops' type is present.
              #
@@ -181,7 +198,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #include <linux/proc_fs.h>
-@@ -4332,11 +4338,11 @@ compile_test() {
+@@ -3915,11 +3919,11 @@ compile_test() {
              # Added by commit fb7fcc96a86cf ("timekeeping: Standardize on
              # ktime_get_*() naming") in 4.18 (2018-04-27)
              #
@@ -198,7 +215,7 @@ index d2cb8475..e1247f6e 100755
              compile_check_conftest "$CODE" "NV_KTIME_GET_RAW_TS64_PRESENT" "" "functions"
          ;;
  
-@@ -4347,11 +4353,11 @@ compile_test() {
+@@ -3930,11 +3934,11 @@ compile_test() {
              # Added by commit d6d29896c665d ("timekeeping: Provide timespec64
              # based interfaces") in 3.17 (2014-07-16)
              #
@@ -215,7 +232,25 @@ index d2cb8475..e1247f6e 100755
              compile_check_conftest "$CODE" "NV_KTIME_GET_REAL_TS64_PRESENT" "" "functions"
          ;;
  
-@@ -4361,7 +4367,8 @@ compile_test() {
+@@ -3945,7 +3949,8 @@ compile_test() {
+             # The third argument to __vmalloc, page protection
+             # 'pgprot_t prot', was removed by commit 88dca4ca5a93
+             # (mm: remove the pgprot argument to __vmalloc)
+-            # in v5.8-rc1 (2020-06-01).
++            # in v5.8.
++            #
+             CODE="
+             #include <linux/vmalloc.h>
+ 
+@@ -3953,7 +3958,6 @@ compile_test() {
+                 pgprot_t prot;
+                 (void)__vmalloc(0, 0, prot);
+             }"
+-
+             compile_check_conftest "$CODE" "NV_VMALLOC_HAS_PGPROT_T_ARG" "" "types"
+ 
+         ;;
+@@ -3964,7 +3968,8 @@ compile_test() {
              #
              # Kernel commit da1c55f1b272 ("mmap locking API: rename mmap_sem
              # to mmap_lock") replaced the field 'mmap_sem' by 'mmap_lock'
@@ -225,7 +260,24 @@ index d2cb8475..e1247f6e 100755
              CODE="
              #include <linux/mm_types.h>
  
-@@ -4418,12 +4425,11 @@ compile_test() {
+@@ -3983,11 +3988,11 @@ compile_test() {
+             # Added by commit a7c3e901a46ff54c016d040847eda598a9e3e653 ("mm:
+             # introduce kv[mz]alloc helpers") in v4.12 (2017-05-08).
+             #
+-        CODE="
+-        #include <linux/mm.h>
+-        void conftest_kvmalloc(void){
+-            kvmalloc();
+-        }"
++            CODE="
++            #include <linux/mm.h>
++            void conftest_kvmalloc(void){
++                kvmalloc();
++            }"
+             compile_check_conftest "$CODE" "NV_KVMALLOC_PRESENT" "" "functions"
+         ;;
+ 
+@@ -3995,12 +4000,11 @@ compile_test() {
              #
              # Determine if the function drm_gem_object_put_unlocked() is present.
              #
@@ -243,7 +295,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_DRM_DRMP_H_PRESENT)
-@@ -4446,7 +4452,7 @@ compile_test() {
+@@ -4023,7 +4027,7 @@ compile_test() {
              # field.
              #
              # Removed by commit 0425662fdf05 ("drm: Nuke mode->vrefresh") in
@@ -252,7 +304,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #include <drm/drm_modes.h>
-@@ -4464,7 +4470,7 @@ compile_test() {
+@@ -4041,7 +4045,7 @@ compile_test() {
              # Determine if drm_driver::master_set() returns integer value
              #
              # Changed to void by commit 907f53200f98 ("drm: vmwgfx: remove
@@ -261,7 +313,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_DRM_DRMP_H_PRESENT)
-@@ -4490,7 +4496,7 @@ compile_test() {
+@@ -4067,7 +4071,7 @@ compile_test() {
              # function pointer.
              #
              # drm_driver::gem_free_object is removed by commit 1a9458aeb8eb
@@ -270,7 +322,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_DRM_DRMP_H_PRESENT)
-@@ -4513,7 +4519,7 @@ compile_test() {
+@@ -4090,7 +4094,7 @@ compile_test() {
              # Determine if vga_tryget() is present
              #
              # vga_tryget() was removed by commit f369bc3f9096 ("vgaarb: mark
@@ -279,7 +331,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #include <linux/vgaarb.h>
-@@ -4530,7 +4536,7 @@ compile_test() {
+@@ -4107,7 +4111,7 @@ compile_test() {
              #
              # pci_channel_state was removed by commit 16d79cd4e23b ("PCI: Use
              # 'pci_channel_state_t' instead of 'enum pci_channel_state'") in
@@ -288,7 +340,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #include <linux/pci.h>
-@@ -4545,8 +4551,9 @@ compile_test() {
+@@ -4122,8 +4126,9 @@ compile_test() {
              #
              # Determine if drm_prime_pages_to_sg() has 'dev' argument.
              #
@@ -300,7 +352,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_DRM_DRMP_H_PRESENT)
-@@ -4570,9 +4577,9 @@ compile_test() {
+@@ -4147,9 +4152,9 @@ compile_test() {
              # Determine if drm_driver structure has the GEM and PRIME callback
              # function pointers.
              #
@@ -313,7 +365,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_DRM_DRMP_H_PRESENT)
-@@ -4601,8 +4608,8 @@ compile_test() {
+@@ -4178,8 +4183,8 @@ compile_test() {
              # Determine if drm_crtc_helper_funcs::atomic_check takes 'state'
              # argument of 'struct drm_atomic_state' type.
              #
@@ -323,8 +375,8 @@ index d2cb8475..e1247f6e 100755
 +            # atomic_check") in v5.11 passed the full atomic state to
              # drm_crtc_helper_funcs::atomic_check()
              #
-             # To test the signature of drm_crtc_helper_funcs::atomic_check(),
-@@ -4638,9 +4645,9 @@ compile_test() {
+             # Turning incompatible-pointer-types check into error is necessary
+@@ -4215,9 +4220,9 @@ compile_test() {
              # Determine if drm_gem_object_funcs::vmap takes 'map'
              # argument of 'struct dma_buf_map' type.
              #
@@ -337,7 +389,7 @@ index d2cb8475..e1247f6e 100755
              #
              # Note that the 'map' argument type is changed from 'struct dma_buf_map'
              # to 'struct iosys_map' by commit 7938f4218168 ("dma-buf-map: Rename
-@@ -4665,6 +4672,9 @@ compile_test() {
+@@ -4257,6 +4262,9 @@ compile_test() {
              # by commit 233eb0bf3b94 ("mm: remove follow_pfn")
              # from linux-next 233eb0bf3b94.
              #
@@ -347,7 +399,7 @@ index d2cb8475..e1247f6e 100755
              CODE="
              #include <linux/mm.h>
              void conftest_follow_pfn(void) {
-@@ -4679,8 +4689,8 @@ compile_test() {
+@@ -4271,8 +4279,8 @@ compile_test() {
              # Determine if drm_plane_helper_funcs::atomic_check takes 'state'
              # argument of 'struct drm_atomic_state' type.
              #
@@ -357,8 +409,8 @@ index d2cb8475..e1247f6e 100755
 +            # atomic_check") in v5.13 passes the full atomic state to
              # drm_plane_helper_funcs::atomic_check()
              #
-             # To test the signature of drm_plane_helper_funcs::atomic_check(),
-@@ -4716,7 +4726,7 @@ compile_test() {
+             # Turning incompatible-pointer-types check into error is necessary
+@@ -4308,7 +4316,7 @@ compile_test() {
              # Determine if the 'drm_device' structure has a 'pdev' field.
              #
              # Removed by commit b347e04452ff ("drm: Remove pdev field from
@@ -367,7 +419,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_DRM_DRMP_H_PRESENT)
-@@ -4757,7 +4767,7 @@ compile_test() {
+@@ -4365,7 +4373,7 @@ compile_test() {
              # dma_resv_add_excl_fence() and dma_resv_add_shared_fence() were
              # removed and replaced with dma_resv_add_fence() by commit
              # 73511edf8b19 ("dma-buf: specify usage while adding fences to
@@ -376,7 +428,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_LINUX_DMA_RESV_H_PRESENT)
-@@ -4851,9 +4861,8 @@ compile_test() {
+@@ -4382,9 +4390,8 @@ compile_test() {
              #
              # Determine if 'struct drm_connector' has an 'override_edid' member.
              #
@@ -388,7 +440,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_DRM_DRM_CRTC_H_PRESENT)
-@@ -4874,10 +4883,9 @@ compile_test() {
+@@ -4405,10 +4412,9 @@ compile_test() {
              # Determine if the 'vm_area_struct' structure has
              # const 'vm_flags'.
              #
@@ -402,7 +454,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #include <linux/mm_types.h>
-@@ -4893,8 +4901,8 @@ compile_test() {
+@@ -4424,8 +4430,8 @@ compile_test() {
              # Determine if the 'drm_driver' structure has a 'dumb_destroy'
              # function pointer.
              #
@@ -413,7 +465,7 @@ index d2cb8475..e1247f6e 100755
              #
              CODE="
              #if defined(NV_DRM_DRMP_H_PRESENT)
-@@ -4957,10 +4965,12 @@ compile_test() {
+@@ -4488,10 +4494,12 @@ compile_test() {
          ;;
  
          # When adding a new conftest entry, please use the correct format for

@@ -1,4 +1,4 @@
-From 3ff379c53767f24254ac8723e9bd2cd944cb1e46 Mon Sep 17 00:00:00 2001
+From 803a010b8db9319ea4bc7c687b27b288f67aa7b0 Mon Sep 17 00:00:00 2001
 From: Andreas Beckmann <anbe@debian.org>
 Date: Thu, 19 Jun 2025 10:20:07 +0200
 Subject: [PATCH] backport nv_vma_start_write changes from 570.169
